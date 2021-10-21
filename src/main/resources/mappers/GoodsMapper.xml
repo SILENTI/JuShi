@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.jushi.mapper.GoodsMapper">
+  <resultMap id="BaseResultMap" type="com.example.jushi.model.Goods">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="g_id" jdbcType="INTEGER" property="gId" />
+    <result column="g_name" jdbcType="VARCHAR" property="gName" />
+    <result column="g_img" jdbcType="VARCHAR" property="gImg" />
+    <result column="g_type" jdbcType="VARCHAR" property="gType" />
+    <result column="g_price" jdbcType="DECIMAL" property="gPrice" />
+    <result column="g_stock" jdbcType="INTEGER" property="gStock" />
+    <result column="reserved_1" jdbcType="VARCHAR" property="reserved1" />
+    <result column="reserved_2" jdbcType="VARCHAR" property="reserved2" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from goods
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.example.jushi.model.Goods">
+    insert into goods (id, g_id, g_name, 
+      g_img, g_type, g_price, 
+      g_stock, reserved_1, reserved_2
+      )
+    values (#{id,jdbcType=INTEGER}, #{gId,jdbcType=INTEGER}, #{gName,jdbcType=VARCHAR}, 
+      #{gImg,jdbcType=VARCHAR}, #{gType,jdbcType=VARCHAR}, #{gPrice,jdbcType=DECIMAL}, 
+      #{gStock,jdbcType=INTEGER}, #{reserved1,jdbcType=VARCHAR}, #{reserved2,jdbcType=VARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.example.jushi.model.Goods">
+    update goods
+    set g_id = #{gId,jdbcType=INTEGER},
+      g_name = #{gName,jdbcType=VARCHAR},
+      g_img = #{gImg,jdbcType=VARCHAR},
+      g_type = #{gType,jdbcType=VARCHAR},
+      g_price = #{gPrice,jdbcType=DECIMAL},
+      g_stock = #{gStock,jdbcType=INTEGER},
+      reserved_1 = #{reserved1,jdbcType=VARCHAR},
+      reserved_2 = #{reserved2,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, g_id, g_name, g_img, g_type, g_price, g_stock, reserved_1, reserved_2
+    from goods
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" resultType="Goods">
+    select id, g_id, g_name, g_img, g_type, g_price, g_stock, reserved_1, reserved_2
+    from goods
+  </select>
+
+  <select id="selectName" resultType="String">
+    select g_name from goods where g_id = 1;
+  </select>
+</mapper>
