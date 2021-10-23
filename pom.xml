@@ -52,11 +52,21 @@
             <version>2.2.0</version>
         </dependency>
 
+        <!--Mysql资源包-->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
 
+        <!--Spring Boot Devools 依赖-->
+        <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-devtools -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <scope>runtime</scope>
+            <optional>true</optional>
+        </dependency>
+        
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>

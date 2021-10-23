@@ -1,4 +1,7 @@
 spring:
+  devtools:
+    restart:
+      enabled: true
   datasource:
     url: jdbc:mysql://localhost:3306/jushi?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
     driver-class-name: com.mysql.cj.jdbc.Driver
