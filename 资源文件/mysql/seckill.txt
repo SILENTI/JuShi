@@ -1,0 +1,1 @@
+"id"	"g_id"	"s_start"	"s_end"	"s_price"	"s_count"	"reserved_1"	"reserved_2"
