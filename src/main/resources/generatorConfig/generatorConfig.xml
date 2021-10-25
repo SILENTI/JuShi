@@ -7,10 +7,6 @@
         <!--生成的java文件编码格式-->
         <property name="javaFileEncoding" value="UTF-8"/>
 
-        <!--每次启动覆盖原有的Mapper-->
-        <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin"/>
-
-
          <!--注释生成器-->
          <commentGenerator>
              <property name="suppressDate" value="true"/>
@@ -19,7 +15,7 @@
 
         <!--数据库连接配置-->
         <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
-                        connectionURL="jdbc:mysql://localhost:3306/jushi?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false&amp;serverTimezone=UTC&amp;allowPublicKeyRetrieval=true"
+                        connectionURL="jdbc:mysql://localhost:3306/jushi"
                         userId="root" password="root"/>
 
         <!--生成entity/domain对象-->

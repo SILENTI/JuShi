@@ -23,6 +23,11 @@ public class GoodsController {
         return "GoodsShow";
     }
 
+    @GetMapping("/")
+    public String mode(){
+        return "Login";
+    }
+
 
 
 }

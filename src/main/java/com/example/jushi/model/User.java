@@ -1,11 +1,18 @@
 package com.example.jushi.model;
 
-public class Users {
+import lombok.Data;
+
+@Data
+public class User {
     private String user;
 
     private Long currentConnections;
 
     private Long totalConnections;
+
+    private String userName;
+
+    private String passWord;
 
     public String getUser() {
         return user;
