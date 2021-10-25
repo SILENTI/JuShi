@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.jushi.mapper.UsersMapper">
+  <resultMap id="BaseResultMap" type="com.example.jushi.model.Users">
+    <result column="USER" jdbcType="CHAR" property="user" />
+    <result column="CURRENT_CONNECTIONS" jdbcType="BIGINT" property="currentConnections" />
+    <result column="TOTAL_CONNECTIONS" jdbcType="BIGINT" property="totalConnections" />
+  </resultMap>
+  <insert id="insert" parameterType="com.example.jushi.model.Users">
+    insert into users (USER, CURRENT_CONNECTIONS, TOTAL_CONNECTIONS
+      )
+    values (#{user,jdbcType=CHAR}, #{currentConnections,jdbcType=BIGINT}, #{totalConnections,jdbcType=BIGINT}
+      )
+  </insert>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select USER, CURRENT_CONNECTIONS, TOTAL_CONNECTIONS
+    from users
+  </select>
+</mapper>

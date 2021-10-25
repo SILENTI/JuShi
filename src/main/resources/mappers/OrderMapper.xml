@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.jushi.mapper.OrderMapper">
+  <resultMap id="BaseResultMap" type="com.example.jushi.model.Order">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="o_id" jdbcType="BIGINT" property="oId" />
+    <result column="o_time" jdbcType="TIMESTAMP" property="oTime" />
+    <result column="o_id_list" jdbcType="VARCHAR" property="oIdList" />
+    <result column="u_id" jdbcType="INTEGER" property="uId" />
+    <result column="o_site" jdbcType="VARCHAR" property="oSite" />
+    <result column="o_remarks" jdbcType="VARCHAR" property="oRemarks" />
+    <result column="received_1" jdbcType="VARCHAR" property="received1" />
+    <result column="received_2" jdbcType="VARCHAR" property="received2" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from order
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.example.jushi.model.Order">
+    insert into order (id, o_id, o_time, 
+      o_id_list, u_id, o_site, 
+      o_remarks, received_1, received_2
+      )
+    values (#{id,jdbcType=BIGINT}, #{oId,jdbcType=BIGINT}, #{oTime,jdbcType=TIMESTAMP}, 
+      #{oIdList,jdbcType=VARCHAR}, #{uId,jdbcType=INTEGER}, #{oSite,jdbcType=VARCHAR}, 
+      #{oRemarks,jdbcType=VARCHAR}, #{received1,jdbcType=VARCHAR}, #{received2,jdbcType=VARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.example.jushi.model.Order">
+    update order
+    set o_id = #{oId,jdbcType=BIGINT},
+      o_time = #{oTime,jdbcType=TIMESTAMP},
+      o_id_list = #{oIdList,jdbcType=VARCHAR},
+      u_id = #{uId,jdbcType=INTEGER},
+      o_site = #{oSite,jdbcType=VARCHAR},
+      o_remarks = #{oRemarks,jdbcType=VARCHAR},
+      received_1 = #{received1,jdbcType=VARCHAR},
+      received_2 = #{received2,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select id, o_id, o_time, o_id_list, u_id, o_site, o_remarks, received_1, received_2
+    from order
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, o_id, o_time, o_id_list, u_id, o_site, o_remarks, received_1, received_2
+    from order
+  </select>
+</mapper>

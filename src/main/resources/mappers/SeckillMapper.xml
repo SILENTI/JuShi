@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.jushi.mapper.SeckillMapper">
+  <resultMap id="BaseResultMap" type="com.example.jushi.model.Seckill">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="g_id" jdbcType="BIGINT" property="gId" />
+    <result column="s_start" jdbcType="TIMESTAMP" property="sStart" />
+    <result column="s_end" jdbcType="TIMESTAMP" property="sEnd" />
+    <result column="s_price" jdbcType="DECIMAL" property="sPrice" />
+    <result column="s_count" jdbcType="INTEGER" property="sCount" />
+    <result column="reserved_1" jdbcType="VARCHAR" property="reserved1" />
+    <result column="reserved_2" jdbcType="VARCHAR" property="reserved2" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from seckill
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.example.jushi.model.Seckill">
+    insert into seckill (id, g_id, s_start, 
+      s_end, s_price, s_count, 
+      reserved_1, reserved_2)
+    values (#{id,jdbcType=BIGINT}, #{gId,jdbcType=BIGINT}, #{sStart,jdbcType=TIMESTAMP}, 
+      #{sEnd,jdbcType=TIMESTAMP}, #{sPrice,jdbcType=DECIMAL}, #{sCount,jdbcType=INTEGER}, 
+      #{reserved1,jdbcType=VARCHAR}, #{reserved2,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.example.jushi.model.Seckill">
+    update seckill
+    set g_id = #{gId,jdbcType=BIGINT},
+      s_start = #{sStart,jdbcType=TIMESTAMP},
+      s_end = #{sEnd,jdbcType=TIMESTAMP},
+      s_price = #{sPrice,jdbcType=DECIMAL},
+      s_count = #{sCount,jdbcType=INTEGER},
+      reserved_1 = #{reserved1,jdbcType=VARCHAR},
+      reserved_2 = #{reserved2,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select id, g_id, s_start, s_end, s_price, s_count, reserved_1, reserved_2
+    from seckill
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, g_id, s_start, s_end, s_price, s_count, reserved_1, reserved_2
+    from seckill
+  </select>
+</mapper>
