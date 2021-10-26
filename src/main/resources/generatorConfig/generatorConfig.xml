@@ -11,23 +11,34 @@
          <commentGenerator>
              <property name="suppressDate" value="true"/>
              <property name="suppressAllComments" value="true"/>
+
          </commentGenerator>
 
         <!--数据库连接配置-->
         <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
                         connectionURL="jdbc:mysql://localhost:3306/jushi"
-                        userId="root" password="root"/>
+                        userId="root" password="root">
+            <property name="nullCatalogMeansCurrent" value="true"/>
+        </jdbcConnection>
 
         <!--生成entity/domain对象-->
-        <javaModelGenerator targetPackage="com.example.jushi.model" targetProject="src/main/java"/>
+        <javaModelGenerator targetPackage="com.example.jushi.model" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true" />
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
 
         <!--生成mapper文件-->
-        <sqlMapGenerator targetPackage="mappers" targetProject="src/main/resources"/>
+        <sqlMapGenerator targetPackage="mappers" targetProject="src/main/resources">
+            <property name="enableSubPackages" value="true" />
+        </sqlMapGenerator>
 
         <!--生成mapper接口/dao接口-->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.example.jushi.mapper" targetProject="src/main/java"/>
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.example.jushi.mapper" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true" />
+        </javaClientGenerator>
 
         <!--对应表名-->
-        <table tableName="users"/>
+        <table tableName="user" domainObjectName="User" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+
     </context>
 </generatorConfiguration>

@@ -11,23 +11,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 @Controller
+@RequestMapping("/JuShi")
 public class GoodsController {
 
     @Autowired
     private GoodsService goodsService;
 
-    @GetMapping("/JuShi")
+    @RequestMapping("/")
     public String goods (Model model){
         List<GoodsVo> goodsVos = goodsService.goodsShowAll();
         model.addAttribute("GoodsVo",goodsVos);
         return "GoodsShow";
     }
-
-    @GetMapping("/")
-    public String mode(){
-        return "Login";
-    }
-
-
 
 }

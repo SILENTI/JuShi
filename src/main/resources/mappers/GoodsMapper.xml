@@ -48,7 +48,4 @@
     from goods
   </select>
 
-  <select id="selectName" resultType="String">
-    select g_name from goods where g_id = 1;
-  </select>
 </mapper>
