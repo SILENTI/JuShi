@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.jushi.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.example.jushi.model.User">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="u_id" jdbcType="INTEGER" property="uId" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="reserved_1" jdbcType="VARCHAR" property="reserved1" />
+    <result column="reserved_2" jdbcType="VARCHAR" property="reserved2" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.example.jushi.model.User">
+    insert into user (id, u_id, username, 
+      password, reserved_1, reserved_2
+      )
+    values (#{id,jdbcType=INTEGER}, #{uId,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{reserved1,jdbcType=VARCHAR}, #{reserved2,jdbcType=VARCHAR}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.example.jushi.model.User">
+    update user
+    set u_id = #{uId,jdbcType=INTEGER},
+      username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      reserved_1 = #{reserved1,jdbcType=VARCHAR},
+      reserved_2 = #{reserved2,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, u_id, username, password, reserved_1, reserved_2
+    from user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, u_id, username, password, reserved_1, reserved_2
+    from user
+  </select>
+
+  <!--验证用户信息-->
+  <select id="selectForUser" resultMap="BaseResultMap">
+    select u_id, username, password
+    from user
+    where username = #{userName,jdbcType=VARCHAR} and passWord = #{passWord,jdbcType=VARCHAR}
+  </select>
+</mapper>

@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import javax.servlet.http.HttpSession;
+
 
 @Service
 public class UserService implements com.example.jushi.service.UserService {
@@ -17,13 +19,19 @@ public class UserService implements com.example.jushi.service.UserService {
     * 判断账号和密码是否正确
     * */
     @Override
-    public Boolean judegUser (String userName , String passWord , Model model) {
-//          User user = new User(userName,passWord);
+    public Boolean judegUser (String userName , String passWord , HttpSession session) {
+        System.out.println(userName+"  "+passWord);
           User realUser = userMapper.selectForUser(userName,passWord);
-          if (realUser!=null && realUser.getUsername()==userName && realUser.getPassword() == passWord){
-              model.addAttribute("user",realUser);
+        System.out.println(realUser.getUsername()+"----"+realUser.getPassword());
+          if (realUser!=null && realUser.getUsername().equals(userName )&& realUser.getPassword().equals(passWord)){
+              session.setAttribute("user",realUser);
               return true;
           }
         return false;
+    }
+
+    @Override
+    public User fandUserById(int id) {
+        return userMapper.selectByPrimaryKey(id);
     }
 }
