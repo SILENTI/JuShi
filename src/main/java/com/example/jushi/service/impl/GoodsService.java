@@ -9,6 +9,10 @@ import org.springframework.stereotype.Service;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * @author 居無何 
+ * @// TODO: 2021/10/29  
+ * */
 @Service
 public class GoodsService implements com.example.jushi.service.GoodsService {
 
@@ -20,6 +24,7 @@ public class GoodsService implements com.example.jushi.service.GoodsService {
         List<GoodsVo> goodsVos = new LinkedList<>();
         for (Goods goods : goodsMapper.selectAll()) {
             GoodsVo vo = new GoodsVo();
+            vo.setGId(goods.getgId());
             vo.setGName(goods.getgName());
             vo.setGPrice(goods.getgPrice());
             vo.setGStock(goods.getgStock());
@@ -31,5 +36,8 @@ public class GoodsService implements com.example.jushi.service.GoodsService {
         return goodsVos;
     }
 
-
+    @Override
+    public Goods findGoodsInfo(Integer gId) {
+        return goodsMapper.selectByPrimaryKey(gId);
+    }
 }

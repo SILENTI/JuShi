@@ -10,6 +10,8 @@ import java.math.BigDecimal;
 @Data
 public class GoodsVo {
 
+    private Integer gId;
+
     private String gName;
 
     private String gImg;

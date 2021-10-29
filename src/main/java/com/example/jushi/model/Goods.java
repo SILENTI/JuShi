@@ -20,7 +20,7 @@ public class Goods {
 
     private Integer gStock;
 
-    private String reserved1;
+    private Integer gSales;
 
     private String reserved2;
 
@@ -80,12 +80,12 @@ public class Goods {
         this.gStock = gStock;
     }
 
-    public String getReserved1() {
-        return reserved1;
+    public Integer getgSales() {
+        return gSales;
     }
 
-    public void setReserved1(String reserved1) {
-        this.reserved1 = reserved1;
+    public void setgSales(Integer gSales) {
+        this.gSales = gSales;
     }
 
     public String getReserved2() {

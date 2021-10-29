@@ -17,7 +17,7 @@
         <ul>
             <li>
                 <div th:if="${session.user==null}">
-                    <a href="Login" >
+                    <a href="/JuShi/Login" >
                         未登录
                     </a>
                 </div>
@@ -39,7 +39,10 @@
                 <!-- 展示的商品图片 -->
                 <!--      <div class="imgProd" style="background:url(img/product_img05.jpg) 100% 0 no-repeat;"></div>-->
                 <div class="imgProd">
+                    <!--访问商品的详情页，并要携带商品的id-->
+                    <a th:href="'/JuShi/detail?gId='+${goods.getGId()}">
                     <img th:src="${goods.getGImg()}" height="300" width="280" >
+                    </a>
                 </div>
                 <div class="infoProd">
                     <!-- 商品名 -->

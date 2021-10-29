@@ -22,7 +22,6 @@ public class UserService implements com.example.jushi.service.UserService {
     public Boolean judegUser (String userName , String passWord , HttpSession session) {
         System.out.println(userName+"  "+passWord);
           User realUser = userMapper.selectForUser(userName,passWord);
-        System.out.println(realUser.getUsername()+"----"+realUser.getPassword());
           if (realUser!=null && realUser.getUsername().equals(userName )&& realUser.getPassword().equals(passWord)){
               session.setAttribute("user",realUser);
               return true;
