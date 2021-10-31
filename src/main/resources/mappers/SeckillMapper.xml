@@ -34,11 +34,13 @@
       reserved_2 = #{reserved2,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+
+  <select id="selectByPrimaryKey"  resultMap="BaseResultMap" resultType="Seckill">
     select id, g_id, s_start, s_end, s_price, s_count, reserved_1, reserved_2
     from seckill
-    where id = #{id,jdbcType=BIGINT}
+    where g_id = #{gId,jdbcType=BIGINT}
   </select>
+
   <select id="selectAll" resultMap="BaseResultMap">
     select id, g_id, s_start, s_end, s_price, s_count, reserved_1, reserved_2
     from seckill

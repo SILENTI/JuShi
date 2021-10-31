@@ -1,6 +1,7 @@
 package com.example.jushi.controller;
 
 import com.example.jushi.model.Goods;
+import com.example.jushi.model.SeckillData;
 import com.example.jushi.service.GoodsService;
 import com.example.jushi.vo.GoodsVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,12 +32,12 @@ public class GoodsController {
         return "GoodsShow";
     }
 
-    /**商品详情*/
+    /**商品详情,根据传递过来的gId，查询到需要的商品详情信息*/
     @GetMapping("/detail")
     public String goodsDatail (int gId,Model model){
-        Goods goodsInfo = goodsService.findGoodsInfo(gId);
-        model.addAttribute(goodsInfo);
-        return "GoodsDetail";
+        SeckillData seckillData = goodsService.findSeckillOfGoodsInfo(gId);
+        model.addAttribute(seckillData);
+        return "SeckilShow";
     }
 
 

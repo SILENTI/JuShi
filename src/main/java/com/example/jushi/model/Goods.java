@@ -5,6 +5,9 @@ import lombok.Data;
 import java.math.BigDecimal;
 
 
+/**
+ * @author 居無何
+ */
 public class Goods {
     private Integer id;
 

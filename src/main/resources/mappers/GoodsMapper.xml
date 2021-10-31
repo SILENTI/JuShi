@@ -10,6 +10,12 @@
     <result column="g_price" jdbcType="DECIMAL" property="gPrice" />
     <result column="g_stock" jdbcType="INTEGER" property="gStock" />
     <result column="g_sales" jdbcType="VARCHAR" property="gSales" />
+
+    <result column="s_start" jdbcType="TIMESTAMP" property="sStart" />
+    <result column="s_end" jdbcType="TIMESTAMP" property="sEnd" />
+    <result column="s_price" jdbcType="DECIMAL" property="sPrice" />
+    <result column="s_count" jdbcType="INTEGER" property="sCount" />
+
     <result column="reserved_2" jdbcType="VARCHAR" property="reserved2" />
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
@@ -47,5 +53,7 @@
     select  g_id, g_name, g_img, g_type, g_price, g_stock, g_sales, reserved_2
     from goods
   </select>
+
+
 
 </mapper>

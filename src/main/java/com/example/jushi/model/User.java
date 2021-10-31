@@ -2,6 +2,9 @@ package com.example.jushi.model;
 
 import lombok.Data;
 
+/**
+ * @author 居無何
+ */
 @Data
 public class User {
     private Integer id;

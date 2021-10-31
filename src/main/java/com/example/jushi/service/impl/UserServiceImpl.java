@@ -10,12 +10,12 @@ import javax.servlet.http.HttpSession;
 
 
 @Service
-public class UserService implements com.example.jushi.service.UserService {
+public class UserServiceImpl implements com.example.jushi.service.UserService {
 
     @Autowired
     private UserMapper userMapper;
 
-    /*
+    /**
     * 判断账号和密码是否正确
     * */
     @Override
