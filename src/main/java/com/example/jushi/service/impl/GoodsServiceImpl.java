@@ -51,6 +51,7 @@ public class GoodsServiceImpl implements com.example.jushi.service.GoodsService 
         seckillData.setgName(goods.getgName());
         seckillData.setgImg(goods.getgImg());
         seckillData.setgType(goods.getgType());
+        seckillData.setgSales(goods.getgSales());
         seckillData.setsStart(seckill.getsStart());
         seckillData.setsEnd(seckill.getsEnd());
         //秒杀价

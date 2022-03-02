@@ -1,38 +1,84 @@
 package com.example.jushi.model;
 
-import lombok.Data;
+import java.util.Date;
 
 /**
  * @author 居無何
+ * date: 2022/2/20
+ * Description:用户表实体类
  */
-@Data
 public class User {
-    private Integer id;
 
-    private Integer uId;
+    private Integer uid;
 
     private String username;
 
     private String password;
 
-    private String reserved1;
+    private String salt;
 
-    private String reserved2;
+    private String phone;
 
-    public Integer getId() {
-        return id;
+    private String email;
+
+    private Integer gender;
+
+    private String avatar;
+
+    private String createUser;
+
+    private Date createTime;
+
+    private String modifUser;
+
+    private Date modifTime;
+
+    public String getSalt() {
+        return salt;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setSalt(String salt) {
+        this.salt = salt;
     }
 
-    public Integer getuId() {
-        return uId;
+    public String getCreateUser() {
+        return createUser;
     }
 
-    public void setuId(Integer uId) {
-        this.uId = uId;
+    public void setCreateUser(String createUser) {
+        this.createUser = createUser;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public String getModifUser() {
+        return modifUser;
+    }
+
+    public void setModifUser(String modifUser) {
+        this.modifUser = modifUser;
+    }
+
+    public Date getModifTime() {
+        return modifTime;
+    }
+
+    public void setModifTime(Date modifTime) {
+        this.modifTime = modifTime;
+    }
+
+    public Integer getUid() {
+        return uid;
+    }
+
+    public void setUid(Integer uid) {
+        this.uid = uid;
     }
 
     public String getUsername() {
@@ -51,19 +97,48 @@ public class User {
         this.password = password == null ? null : password.trim();
     }
 
-    public String getReserved1() {
-        return reserved1;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setReserved1(String reserved1) {
-        this.reserved1 = reserved1 == null ? null : reserved1.trim();
+    public void setPhone(String phone) {
+        this.phone = phone == null ? null : phone.trim();
     }
 
-    public String getReserved2() {
-        return reserved2;
+    public String getEmail() {
+        return email;
     }
 
-    public void setReserved2(String reserved2) {
-        this.reserved2 = reserved2 == null ? null : reserved2.trim();
+    public void setEmail(String email) {
+        this.email = email == null ? null : email.trim();
+    }
+
+    public Integer getGender() {
+        return gender;
+    }
+
+    public void setGender(Integer gender) {
+        this.gender = gender;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar == null ? null : avatar.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "uid=" + uid +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", phone='" + phone + '\'' +
+                ", email='" + email + '\'' +
+                ", gender=" + gender +
+                ", avatar='" + avatar + '\'' +
+                '}';
     }
 }

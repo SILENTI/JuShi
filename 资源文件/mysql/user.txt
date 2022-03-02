@@ -1,2 +1,0 @@
-"id"	"u_id"	"username"	"password"	"reserved_1"	"reserved_2"
-"1"	"1"	"居無何"	"5288"		

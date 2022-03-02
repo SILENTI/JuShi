@@ -1,1 +1,0 @@
-"id"	"o_id"	"o_time"	"o_id_list"	"u_id"	"o_site"	"o_remarks"	"received_1"	"received_2"

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+<meta charset="UTF-8">
+<title>居市</title>
+
+
+<link rel="stylesheet" href="../css/LoginRegister.css">
+<script src="../js/jquery.min.js"></script>
+
+</head>
+
+<body>
+
+<div class="container" id="container">
+	<div class="form-container sign-up-container">
+		<form id="register-form" method="post">
+			<h1>注册</h1>
+			<input name="username" type="text" placeholder="名称" />
+			<input name="email" type="email" placeholder="邮箱" />
+			<input name="password" type="password" placeholder="密码" />
+			<button id="register" >注册</button>
+		</form>
+	</div>
+	<div class="form-container sign-in-container">
+		<form id="login-form" method="post" >
+			<h1>登录</h1>
+			<input name="username" type="text" placeholder="用户名" />
+			<input name="password" type="password" placeholder="密码" />
+			<a href="#">忘记密码？</a>
+			<button id="login" >登录</button>
+		</form>
+	</div>
+	<div class="overlay-container">
+		<div class="overlay">
+			<div class="overlay-panel overlay-left">
+				<h1>欢迎回来！</h1>
+				<p>请您先登录的个人信息，进行操作。</p>
+				<button class="ghost" id="signIn">登录</button>
+			</div>
+			<div class="overlay-panel overlay-right">
+				<h1>你好朋友！</h1>
+				<p>输入您的个人信息注册成为会员。</p>
+				<button class="ghost" id="signUp">注册</button>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+
+<!--ajax实现注册和登录-->
+<script>
+	$("#register").click(function (){
+		$.ajax({
+			url:"/jushi/user/register",
+			//ajax的url路径，使用相对请求路径，填写请求的路径就可
+			async:true,
+			type: "POST",
+			data: $("#register-form").serialize(),
+			dataType: "JSON",
+			success:function(json){
+				if (json.status == 200 ){
+					alert("注册成功，请登录")
+				}else{
+					alert("注册失败！！！")
+				}
+			},
+			error: function (error) {
+				alert("注册时出现未知错误，状态码："+error.status)
+			}
+		})
+		return false;
+	})
+
+	//当点击button时，触发该动作
+	$("#login").click(function (){
+		$.ajax({
+			url:"/jushi/user/login",
+			async:true,
+			type: "POST",
+			data: $("#login-form").serialize(),
+			dataType: "JSON",
+			success:function(json){
+				if (json.status == 200 ){
+					alert("登录成功")
+					window.location.href("/jushi")
+				}else if (json.status == 6000){
+					alert("登录密码错误")
+				}else  if (json.status == 6050){
+					alert("该用户名不存在")
+				}
+			},
+			error: function () {
+				alert("登录失败，出现未知错误！")
+			}
+		})
+	})
+</script>
+
+<!--js实现页面切换-->
+<script>
+	const signUpButton = document.getElementById('signUp');
+	const signInButton = document.getElementById('signIn');
+	const container = document.getElementById('container');
+
+	signUpButton.addEventListener('click', () => {
+	container.classList.add("right-panel-active");
+	});
+
+	signInButton.addEventListener('click', () => {
+	container.classList.remove("right-panel-active");
+	});
+</script>
+
+
+</html>

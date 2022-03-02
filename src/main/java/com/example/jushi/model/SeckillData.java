@@ -16,6 +16,8 @@ public class SeckillData {
 
     private BigDecimal gPrice;
 
+    private Integer gSales;
+
     private String gType;
 
     private Date sStart;
@@ -96,5 +98,13 @@ public class SeckillData {
 
     public void setgPrice(BigDecimal gPrice) {
         this.gPrice = gPrice;
+    }
+
+    public Integer getgSales() {
+        return gSales;
+    }
+
+    public void setgSales(Integer gSales) {
+        this.gSales = gSales;
     }
 }

@@ -31,6 +31,14 @@ input,button,select,textarea{outline:none; border: none; background: none;}
 textarea{resize:none}
 /*{  behavior: url(css/PIE.htc); position: relative;}*/
 
+element.style {
+	margin-top: 100px;
+}
+
+body{
+	margin-top: 100px;
+}
+
 .showbot{float: left;}
 #showbox { background:#eee;}
 #showbox img{ width:400px;height: 400px;}

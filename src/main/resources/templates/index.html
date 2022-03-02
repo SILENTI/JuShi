@@ -1,0 +1,85 @@
+<!DOCTYPE html >
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <!--一般标题栏里的图片是16*16像素-->
+    <link rel="Shortcut Icon" href="../imgs/Logo_5.png" />
+    <title>居市</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+
+</head>
+<body>
+<!--顶部导航栏-->
+<header class="main-header">
+    <h1><a href="/JuShi/" style="font-size: 20px">居 市</a></h1>
+    <nav>
+        <ul>
+            <li>
+                <!--<div th:if="${session.user==null}">
+                    <a href="/JuShi/Login" >
+                        未登录
+                    </a>
+                </div>-->
+            <li>
+                <a href="/jushi/login_register" >
+                    未登录
+                </a>
+            </li>
+
+
+            <li>
+                <a href="#" >
+                    购物车
+                </a>
+
+            </li>
+
+                <div th:if="${session.user!=null}" th:text="${session.user.username}">
+
+                </div>
+
+            </li>
+        </ul>
+    </nav>
+</header>
+
+<div class="contenedorCards">
+    <div th:each=" goods : ${GoodsVo} ">
+        <div class="card">
+            <div class="wrapper">
+                <div class="colorProd"></div>
+                <!-- 展示的商品图片 -->
+                <!--      <div class="imgProd" style="background:url(img/product_img05.jpg) 100% 0 no-repeat;"></div>-->
+                <div class="imgProd">
+                    <!--访问商品的详情页，并要携带商品的id-->
+                    <a th:href="'/JuShi/detail?gId='+${goods.getGId()}">
+                    <img th:src="${goods.getGImg()}" height="300" width="280" >
+                    </a>
+                </div>
+                <div class="infoProd">
+                    <!-- 商品名 -->
+                    <!--ARTFX DC UNIVERSE Batman HUSH Renewal Package-->
+                    <p class="nombreProd" th:text="${goods.getGName()}"></p>
+                    <!-- 发出日期 -->
+                    <!-- <p class="extraInfo">Fecha de salida: 31/03/2021</p> -->
+                    <div class="actions">
+                        <div class="preciosGrupo">
+
+                            <!-- 原价 -->
+                            <!--            <p class="precio precioOferta">9,99</p>-->
+                            <!-- 折后价 -->
+                            <p class="precio precioProd"  th:text="${goods.getGPrice()}"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>z
+
+<script src='../js/jquery.min.js'></script>
+<script src="../js/script.js"></script>
+
+</html>

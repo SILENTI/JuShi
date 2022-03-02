@@ -378,3 +378,31 @@ main {
 	padding: 10rem 6rem;
 	background: #EEE;
 }
+
+ .seckill_data {
+	height: 100px;
+	width: 100%;
+}
+
+ .seckill_data div {
+	float: left;
+	width: 50%;
+}
+
+ .seckill_data span {
+	background-color: #ff6700;
+	display: block;
+	padding: 10px;
+	color: #fff;
+	border-right: #ffffff solid 2px;
+
+}
+
+ .seckill_data p {
+	display: block;
+	padding: 10px;
+	margin-right: 2px;
+	border-left: #ccc solid 2px;
+	border-right: #ccc solid 2px;
+	border-bottom: #ccc solid 2px;
+}
