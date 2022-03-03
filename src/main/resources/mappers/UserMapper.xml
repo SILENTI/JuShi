@@ -86,4 +86,15 @@
     where uid = #{uid,jdbcType=INTEGER}
   </update>
 
+  <!--修改用户资料-->
+  <update id="updateUserInfoByPrimaryKey" parameterType="com.example.jushi.model.User">
+    update user
+    set
+        <if test="phone != null"> phone = #{phone,jdbcType=VARCHAR}, </if>
+        <if test="email != null"> email = #{email,jdbcType=VARCHAR},</if>
+        <if test="gender != null" > gender = #{gender,jdbcType=INTEGER},</if>
+        modif_user = #{modifUser,jdbcType=VARCHAR},
+        modif_time = #{modifTime,jdbcType=TIMESTAMP}
+    where uid = #{uid,jdbcType=INTEGER}
+  </update>
 </mapper>

@@ -48,6 +48,13 @@ public interface UserMapper {
      */
     Integer updatePassword (Integer uid , String password, String modifUser , Date modifTime);
 
+    /**
+     * 修改用户信息，通过传递User对象，其包括电话 phone、邮箱 email、性别 gender、修改人 modifUser、修改时间、modifTime 修改时间；
+     * @param user
+     * @return 返回修改的行数
+     */
+    Integer updateUserInfoByPrimaryKey(User user);
+
     int deleteByPrimaryKey(Integer uid);
 
     User selectByPrimaryKey(Integer uid);

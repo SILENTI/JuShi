@@ -25,16 +25,7 @@ public interface UserService {
      * @param user
      * @return 若登录条件符合，返回user对象
      */
-     UserVo userLogin (User user);
-
-    /**
-     * 判断所传递的用户名和密码是否存在
-     * @param userName 用户名
-     * @param passWord 密码
-     * @param session 查询结果存在，存储到session中
-     * @return Boolean
-     * */
-    Boolean judegUser ( String userName , String passWord , HttpSession session) ;
+     User userLogin (User user);
 
     /**
      * 修改用户密码
@@ -46,9 +37,17 @@ public interface UserService {
     void changePassword (Integer uid,String userName,String oldPassword , String newPassword);
 
     /**
-     *
-     * @param id
+     * 更具uid查询到user信息
+     * @param uid
      * @return User
      * */
-    User fandUserById (int id);
+    User findUserByUid (int uid);
+
+    /**
+     * 修改用户资料
+     * @param user 有前端传递过来的所要修改的信息 phone,email,gender
+     * @param session 从session中获取得到的User对象
+     * @return User
+     */
+    User changeUserInfo (User user, HttpSession session);
 }

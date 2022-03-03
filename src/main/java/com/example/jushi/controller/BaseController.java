@@ -48,6 +48,12 @@ public class BaseController {
         }else  if (e instanceof UserPasswordWrongException){
             jsonDesign.setStatus(6000);
             jsonDesign.setDescription("登录密码错误");
+        }else  if (e instanceof UserNotExitException){
+            jsonDesign.setStatus(6030);
+            jsonDesign.setDescription("用户不存在");
+        }else if (e instanceof UserLoginInfoExpiredException){
+            jsonDesign.setStatus(6040);
+            jsonDesign.setDescription("登录信息过期");
         }else if (e instanceof UserNameNotExistsException){
             jsonDesign.setStatus(6050);
             jsonDesign.setDescription("该用户不存在");

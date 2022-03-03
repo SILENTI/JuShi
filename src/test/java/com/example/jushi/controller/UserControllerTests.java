@@ -2,6 +2,7 @@ package com.example.jushi.controller;
 
 import com.example.jushi.model.User;
 import com.example.jushi.util.JsonResult;
+import com.example.jushi.util.Session;
 import com.example.jushi.vo.UserVo;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,11 +13,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.HttpSessionContext;
-import java.util.Enumeration;
 
 
 /**
@@ -75,4 +73,33 @@ public class UserControllerTests {
         JsonResult jsonResult = userController.changePassword("8888","5288",session);
         System.out.println(jsonResult.toString());
     }
+
+    /**
+     * 查询用户信息
+     */
+    @Test
+    public void user_info (){
+        //常见色session对象
+        HttpSession session = Session.getSession();
+        User user = new User();
+        user.setUid(14);
+        session.setAttribute("user",user);
+        JsonResult<User> findUser = userController.user_info(session);
+        System.out.println(findUser.toString());
+    }
+
+    /**
+     * 修改用户资料信息
+     */
+    @Test
+    public void change_Info () {
+        HttpSession session = Session.getSession();
+        User user = new User();
+        user.setUid(14);
+        user.setGender(0);
+        session.setAttribute("user",user);
+        JsonResult<User> jsonResult = userController.change_Info(user,session);
+        System.out.println(jsonResult.toString());
+    }
+
 }

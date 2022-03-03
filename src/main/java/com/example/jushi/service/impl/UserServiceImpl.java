@@ -59,7 +59,7 @@ public class UserServiceImpl implements UserService {
      * @return 信息符合，返回全信息user对象
      */
     @Override
-    public UserVo userLogin(User user) {
+    public User userLogin(User user) {
 
         User findUser = userMapper.findUserName(user.getUsername());
 
@@ -75,25 +75,22 @@ public class UserServiceImpl implements UserService {
             throw new UserNameOccupyException("账号密码错误");
         }
 
-        //将user PO实体对象转换为 UserVo VO实体对象
-        UserVo userVo = new UserVo(user.getUid(),user.getUsername(),user.getPhone(),user.getEmail(),user.getGender(),user.getAvatar());
-
         //若未抛出以上异常，则证明条件符合，登录成功
-        return userVo;
+        return user;
     }
 
-    /**
-    * 判断账号和密码是否正确
-    * */
-    @Override
-    public Boolean judegUser (String userName , String passWord , HttpSession session) {
-          User realUser = userMapper.selectUser(userName,passWord);
-          if (realUser!=null && realUser.getUsername().equals(userName )&& realUser.getPassword().equals(passWord)){
-              session.setAttribute("user",realUser);
-              return true;
-          }
-        return false;
-    }
+//    /**
+//    * 判断账号和密码是否正确
+//    * */
+//    @Override
+//    public Boolean judegUser (String userName , String passWord , HttpSession session) {
+//          User realUser = userMapper.selectUser(userName,passWord);
+//          if (realUser!=null && realUser.getUsername().equals(userName )&& realUser.getPassword().equals(passWord)){
+//              session.setAttribute("user",realUser);
+//              return true;
+//          }
+//        return false;
+//    }
 
     /**
      * 修改用户密码
@@ -129,8 +126,54 @@ public class UserServiceImpl implements UserService {
 
     }
 
+    /**
+     * 根据uid查询到user信息
+     * @param uid
+     * @return
+     */
     @Override
-    public User fandUserById(int id) {
-        return userMapper.selectByPrimaryKey(id);
+    public User findUserByUid(int uid) {
+        User user = userMapper.findUserByPrimaryKey(uid);
+        if (user == null){
+            throw new UserNotExitException("当前用户不存在");
+        }
+        return user;
+    }
+
+    /**
+     * 修改用户资料信息
+     * @param user 有前端传递过来的所要修改的信息 phone,email,gender
+     * @param session 从session中获取得到的User对象
+     */
+    @Override
+    public User changeUserInfo(User user, HttpSession session) {
+
+        //先检验Session中存储的user是否还生效
+        User session_user = (User) session.getAttribute("user");
+        if (session_user == null){
+            throw new UserLoginInfoExpiredException("用户登录信息过期");
+        }
+
+        //查询用户是否存在
+        User findUser = userMapper.findUserByPrimaryKey(session_user.getUid());
+        if (findUser == null){
+            throw new UserNotExitException("用户不存在");
+        }
+
+        //将session中的userVo中的信息存储到User中，传递给dao
+        user.setUid(findUser.getUid());
+        user.setUsername(findUser.getUsername());
+        user.setModifUser(findUser.getUsername());
+        user.setModifTime(new Date());
+
+        //进行数据的修改
+        Integer record = userMapper.updateUserInfoByPrimaryKey(user);
+        if (record != 1){
+            throw new UpdateException("用户资料修改出现未知错误");
+        }
+
+        //数据更新以后再次进行查询或返回组成的User信息
+        User findNewUser = this.findUserByUid(findUser.getUid());
+        return findNewUser;
     }
 }

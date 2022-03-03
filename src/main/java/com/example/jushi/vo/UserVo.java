@@ -1,5 +1,7 @@
 package com.example.jushi.vo;
 
+import com.example.jushi.model.User;
+
 /**
  * @author 居無何
  * date: 2022/2/27 13:12
@@ -20,6 +22,15 @@ public class UserVo {
     private String avatar;
 
     public UserVo() {
+    }
+
+    public UserVo(User user) {
+        this.uid = user.getUid();
+        this.username = user.getUsername();
+        this.phone = user.getPhone();
+        this.email = user.getEmail();
+        this.gender = user.getGender();
+        this.avatar = user.getAvatar();
     }
 
     public UserVo(Integer uid, String username, String phone, String email, Integer gender, String avatar) {

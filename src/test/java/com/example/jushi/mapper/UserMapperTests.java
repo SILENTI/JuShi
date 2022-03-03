@@ -87,5 +87,11 @@ public class UserMapperTests {
         System.out.println("成功修改记录数："+ index);
     }
 
+    /**
+     * 修改用户信息资料
+     */
+    @Test
+    public void updateUserInfo (){
 
+    }
 }

@@ -15,7 +15,7 @@ import java.util.List;
  * @author 居無何
  * */
 @Controller
-@RequestMapping({"/JuShi","/jushi"})
+@RequestMapping("/jushi")
 public class GoodsController {
 
     @Autowired

@@ -33,6 +33,24 @@ public class User {
 
     private Date modifTime;
 
+    public User() {
+    }
+
+    public User(Integer uid, String username, String password, String salt, String phone, String email, Integer gender, String avatar, String createUser, Date createTime, String modifUser, Date modifTime) {
+        this.uid = uid;
+        this.username = username;
+        this.password = password;
+        this.salt = salt;
+        this.phone = phone;
+        this.email = email;
+        this.gender = gender;
+        this.avatar = avatar;
+        this.createUser = createUser;
+        this.createTime = createTime;
+        this.modifUser = modifUser;
+        this.modifTime = modifTime;
+    }
+
     public String getSalt() {
         return salt;
     }
