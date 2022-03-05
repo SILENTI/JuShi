@@ -1,5 +1,6 @@
 package com.example.jushi.controller;
 
+import com.example.jushi.controller.ex.*;
 import com.example.jushi.service.ex.*;
 import com.example.jushi.util.JsonResult;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -60,6 +61,21 @@ public class BaseController {
         }else if (e instanceof InsertException){
             jsonDesign.setStatus(7000);
             jsonDesign.setDescription("数据新增出现未知错误");
+        } else if (e instanceof FileUploadException){
+            jsonDesign.setStatus(7010);
+            jsonDesign.setDescription("出现文件相关未知异常");
+        } else if (e instanceof FileRedWriteException){
+            jsonDesign.setStatus(7020);
+            jsonDesign.setDescription("文件读写错误");
+        } else if (e instanceof FileSizeOutException){
+            jsonDesign.setStatus(7030);
+            jsonDesign.setDescription("文件大小超出限制");
+        } else if (e instanceof FileTypeNotMatchException ){
+            jsonDesign.setStatus(7040);
+            jsonDesign.setDescription("文件类型不符");
+        } else if (e instanceof FileEmptyException){
+            jsonDesign.setStatus(7050);
+            jsonDesign.setDescription("文件为空");
         }
         return jsonDesign;
     }

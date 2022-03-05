@@ -50,4 +50,12 @@ public interface UserService {
      * @return User
      */
     User changeUserInfo (User user, HttpSession session);
+
+    /**
+     * 修改用户头像
+     * @param uid 用户uid
+     * @param avatar 用户头像的地址路径
+     * @param username 修改头像的用户名
+     */
+    void changeAvatar(Integer uid, String avatar, String username);
 }

@@ -1,12 +1,21 @@
 package com.example.jushi.controller;
 
+import com.example.jushi.controller.ex.FileEmptyException;
+import com.example.jushi.controller.ex.FileRedWriteException;
+import com.example.jushi.controller.ex.FileSizeOutException;
+import com.example.jushi.controller.ex.FileTypeNotMatchException;
 import com.example.jushi.model.User;
 import com.example.jushi.service.UserService;
 import com.example.jushi.util.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.UUID;
 
 /**
  * @author 居無何
@@ -74,7 +83,7 @@ public class UserController extends BaseController {
      * @param session
      * @return
      */
-    @RequestMapping("/user/user_info")
+    @RequestMapping(value = "/user_info",method = RequestMethod.GET)
     public JsonResult<User> user_info(HttpSession session){
 
         //根据session获取uid
@@ -91,7 +100,7 @@ public class UserController extends BaseController {
      * @param session 直接在Session中获取 uid和username等信息
      * @return 返回响应的状态码和更改过后的user信息-是否将更改后的user存储到session中？？？
      */
-    @RequestMapping("/user/change_info")
+    @RequestMapping(value = "/change_info",method = RequestMethod.POST)
     public JsonResult<User> change_Info(User user , HttpSession session){
 
         //进行用户资料的修改
@@ -106,5 +115,64 @@ public class UserController extends BaseController {
         return new JsonResult<User>(changeInfo_user,"用户资料修改成功");
     }
 
+    /**
+     * 上传的图片文件的最大限制
+     */
+    public static final Integer Avatar_Max_Size = 10 * 1024 * 1024;
+
+    /**
+     * 符合的上传文件类型
+     */
+    public static ArrayList<String> FileTypes = new ArrayList<>();
+
+    /**
+     * 静态块文件类型
+     */
+    static{
+           FileTypes.add("image/png");
+           FileTypes.add("image/jpg");
+    }
+
+    /**
+     * 修改用户头像
+     * @param session
+     * @param multipartFile
+     * @return 返回响应码
+     */
+    @RequestMapping(value = "/change_avatar",method = RequestMethod.POST)
+    public JsonResult<Void> change_avatar (HttpSession session, @RequestParam("avatarFile") MultipartFile multipartFile){
+
+        //对文件进行审核-文件是否为null、文件大小、文件类型；
+        if (multipartFile.isEmpty()){
+            throw new FileEmptyException("上传文件为空");
+        } else if (multipartFile.getSize() > Avatar_Max_Size){
+            throw new FileSizeOutException("上传文件超出限制");
+        } else if (!FileTypes.contains(multipartFile.getContentType())){
+            throw new FileTypeNotMatchException("文件类型不符");
+        }
+
+        //先将头像图片文件传递到服务器存储-现直接上文件上传到static文件夹现的imgs文件夹现的user文件夹
+        String multipartFileType = multipartFile.getContentType();
+        String fileType = multipartFileType.substring(multipartFileType.lastIndexOf("/")+1);
+        String fileName = UUID.randomUUID().toString()+"."+fileType;
+        String filePath = "E:\\PRPJECT\\JavaEE\\JuShi\\src\\main\\resources\\static\\imgs\\"+fileName;
+        File file = new File(filePath);
+        try {
+            multipartFile.transferTo(file);
+        } catch (IOException e) {
+            throw new FileRedWriteException("文件读写时出现未知无误");
+        }
+
+        //获取存储在服务器中的图片的路径
+        String avatarPath = filePath.substring(filePath.lastIndexOf("static\\"));
+
+        //将路径和session中存储的user信息传递个service层做数据的更新
+        User user = (User) session.getAttribute("user");
+        System.out.println("session:"+user.toString());
+        userService.changeAvatar(user.getUid(),avatarPath,user.getUsername());
+
+        //若都未抛出异常，返回响应码 200
+        return new JsonResult<Void>("用户头像上传成功");
+    }
 
 }

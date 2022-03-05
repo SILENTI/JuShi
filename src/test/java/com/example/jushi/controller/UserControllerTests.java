@@ -4,17 +4,23 @@ import com.example.jushi.model.User;
 import com.example.jushi.util.JsonResult;
 import com.example.jushi.util.Session;
 import com.example.jushi.vo.UserVo;
+import jdk.jfr.ContentType;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.mock.web.MockHttpSession;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 
 /**
@@ -100,6 +106,18 @@ public class UserControllerTests {
         session.setAttribute("user",user);
         JsonResult<User> jsonResult = userController.change_Info(user,session);
         System.out.println(jsonResult.toString());
+    }
+
+    /**
+     * 修改用户头像
+     */
+    @Test
+    public void changeAvatar () throws FileNotFoundException {
+        User user = new User();
+        user.setUid(14);
+        user.setUsername("鲁路修");
+        HttpSession session = Session.getSession();
+        session.setAttribute("user",user);
     }
 
 }

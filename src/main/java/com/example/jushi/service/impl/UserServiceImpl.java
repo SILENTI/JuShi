@@ -76,7 +76,7 @@ public class UserServiceImpl implements UserService {
         }
 
         //若未抛出以上异常，则证明条件符合，登录成功
-        return user;
+        return findUser;
     }
 
 //    /**
@@ -175,5 +175,34 @@ public class UserServiceImpl implements UserService {
         //数据更新以后再次进行查询或返回组成的User信息
         User findNewUser = this.findUserByUid(findUser.getUid());
         return findNewUser;
+    }
+
+    /**
+     * 修改用户头像
+     * @param uid 用户uid
+     * @param avatar 用户头像的地址路径
+     * @param username 修改头像的用户名
+     */
+    @Override
+    public void changeAvatar(Integer uid, String avatar, String username) {
+
+        //查询user是否生效
+        findUserByUid(uid);
+
+//        System.out.println(uid+"   "+username);
+
+        //若用户存在，则进行用户头像的修改\
+        User user = new User();
+        user.setUid(uid);
+        user.setAvatar(avatar);
+        user.setUsername(username);
+        Integer record =  userMapper.updateUserAvatar(user);
+
+//        System.out.println("修改记录"+record);
+
+        if (record != 1){
+            throw new UpdateException("遇到未知错误,数据更新失败");
+        }
+
     }
 }

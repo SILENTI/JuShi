@@ -97,4 +97,14 @@
         modif_time = #{modifTime,jdbcType=TIMESTAMP}
     where uid = #{uid,jdbcType=INTEGER}
   </update>
+
+  <!--修改用户头像-->
+  <update id="updateUserAvatar" parameterType="com.example.jushi.model.User">
+    update user set
+      avatar = #{avatar,jdbcType=VARCHAR},
+      modif_user = #{modifUser,jdbcType=VARCHAR},
+      modif_time = #{modifTime,jdbcType=TIMESTAMP}
+    where uid = #{uid,jdbcType=INTEGER}
+  </update>
+
 </mapper>

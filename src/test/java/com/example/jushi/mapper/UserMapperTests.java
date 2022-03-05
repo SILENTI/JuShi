@@ -94,4 +94,18 @@ public class UserMapperTests {
     public void updateUserInfo (){
 
     }
+
+    /**
+     * 修改用户头像
+     */
+    @Test
+    public void updateUserAvatar () {
+        User user = new User();
+        user.setUid(14);
+        user.setAvatar("头像路径");
+        user.setModifUser("鲁路修");
+        user.setModifTime(new Date());
+        Integer record  = userMapper.updateUserAvatar(user);
+        System.out.println("修改记录："+ record);
+    }
 }

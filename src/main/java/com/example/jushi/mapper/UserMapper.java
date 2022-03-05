@@ -55,6 +55,13 @@ public interface UserMapper {
      */
     Integer updateUserInfoByPrimaryKey(User user);
 
+    /**
+     * 更新用户头像
+     * @param user
+     * @return
+     */
+    Integer updateUserAvatar (User user);
+
     int deleteByPrimaryKey(Integer uid);
 
     User selectByPrimaryKey(Integer uid);
