@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.jushi.mapper.AddressMapper">
+  <resultMap id="BaseResultMap" type="com.example.jushi.model.Address">
+    <id column="aid" jdbcType="INTEGER" property="aid" />
+    <result column="uid" jdbcType="INTEGER" property="uid" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="province_name" jdbcType="VARCHAR" property="provinceName" />
+    <result column="province_code" jdbcType="CHAR" property="provinceCode" />
+    <result column="city_name" jdbcType="VARCHAR" property="cityName" />
+    <result column="city_code" jdbcType="CHAR" property="cityCode" />
+    <result column="area_name" jdbcType="VARCHAR" property="areaName" />
+    <result column="area_code" jdbcType="CHAR" property="areaCode" />
+    <result column="postal" jdbcType="CHAR" property="postal" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="tel" jdbcType="VARCHAR" property="tel" />
+    <result column="tag" jdbcType="VARCHAR" property="tag" />
+    <result column="is_default" jdbcType="INTEGER" property="isDefault" />
+    <result column="create_user" jdbcType="VARCHAR" property="createUser" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="modif_user" jdbcType="VARCHAR" property="modifUser" />
+    <result column="modif_time" jdbcType="TIMESTAMP" property="modifTime" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from address
+    where aid = #{aid,jdbcType=INTEGER}
+  </delete>
+
+  <!--新增用户收货地址-->
+  <insert id="insert" parameterType="com.example.jushi.model.Address">
+    insert into address (aid, uid, name, 
+      province_name, province_code, city_name, 
+      city_code, area_name, area_code, 
+      postal, address, phone, 
+      tel, tag, is_default, 
+      create_user, create_time, modif_user, modif_time
+      )
+    values (#{aid,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
+      #{provinceName,jdbcType=VARCHAR}, #{provinceCode,jdbcType=CHAR}, #{cityName,jdbcType=VARCHAR}, 
+      #{cityCode,jdbcType=CHAR}, #{areaName,jdbcType=VARCHAR}, #{areaCode,jdbcType=CHAR}, 
+      #{postal,jdbcType=CHAR}, #{address,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{tel,jdbcType=VARCHAR}, #{tag,jdbcType=VARCHAR}, #{isDefault,jdbcType=INTEGER}, 
+      #{createUser,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{modifUser,jdbcType=VARCHAR},#{modifTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+
+
+  <update id="updateByPrimaryKey" parameterType="com.example.jushi.model.Address">
+    update address
+    set uid = #{uid,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      province_name = #{provinceName,jdbcType=VARCHAR},
+      province_code = #{provinceCode,jdbcType=CHAR},
+      city_name = #{cityName,jdbcType=VARCHAR},
+      city_code = #{cityCode,jdbcType=CHAR},
+      area_name = #{areaName,jdbcType=VARCHAR},
+      area_code = #{areaCode,jdbcType=CHAR},
+      postal = #{postal,jdbcType=CHAR},
+      address = #{address,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=VARCHAR},
+      tag = #{tag,jdbcType=VARCHAR},
+      is_default = #{isDefault,jdbcType=INTEGER},
+      create_user = #{createUser,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modif_user = #{modifUser,jdbcType=VARCHAR}
+      modif_time = #{modifTime,jdbcType=TIMESTAMP}
+    where aid = #{aid,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select aid, uid, name, province_name, province_code, city_name, city_code, area_name, 
+    area_code, postal, address, phone, tel, tag, is_default, create_user, create_time, 
+    modif_user,modif_time
+    from address
+    where aid = #{aid,jdbcType=INTEGER}
+  </select>
+
+  <!--根据用户id查询到所有的收货地址信息-->
+  <select id="selectAllByUid" resultMap="BaseResultMap">
+    select aid, uid, name, province_name, province_code, city_name, city_code, area_name, 
+    area_code, postal, address, phone, tel, tag, is_default, create_user, create_time, 
+    modif_user,modif_time
+    from address where uid = #{uid,jdbcType=INTEGER}
+  </select>
+
+  <!--查询用户收货地址的数量-->
+  <select id="countByUid" resultType="java.lang.Integer">
+    select count(*) from address
+    where uid = #{uid,jdbcType=INTEGER}
+  </select>
+
+
+
+</mapper>

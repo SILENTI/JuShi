@@ -50,14 +50,17 @@ public class BaseController {
             jsonDesign.setStatus(6000);
             jsonDesign.setDescription("登录密码错误");
         }else  if (e instanceof UserNotExitException){
-            jsonDesign.setStatus(6030);
+            jsonDesign.setStatus(6005);
             jsonDesign.setDescription("用户不存在");
         }else if (e instanceof UserLoginInfoExpiredException){
-            jsonDesign.setStatus(6040);
+            jsonDesign.setStatus(6010);
             jsonDesign.setDescription("登录信息过期");
         }else if (e instanceof UserNameNotExistsException){
-            jsonDesign.setStatus(6050);
+            jsonDesign.setStatus(6015);
             jsonDesign.setDescription("该用户不存在");
+        }else if (e instanceof AddressNotExistException){
+            jsonDesign.setStatus(6020);
+            jsonDesign.setDescription("当前用户未建收货地址");
         }else if (e instanceof InsertException){
             jsonDesign.setStatus(7000);
             jsonDesign.setDescription("数据新增出现未知错误");
