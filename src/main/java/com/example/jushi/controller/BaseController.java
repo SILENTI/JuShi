@@ -61,7 +61,10 @@ public class BaseController {
         }else if (e instanceof AddressNotExistException){
             jsonDesign.setStatus(6020);
             jsonDesign.setDescription("当前用户未建收货地址");
-        }else if (e instanceof InsertException){
+        }else if (e instanceof DistrictException){
+            jsonDesign.setStatus(6025);
+            jsonDesign.setDescription("遇到未知错误，地区信息查询失败");
+        }else  if (e instanceof InsertException){
             jsonDesign.setStatus(7000);
             jsonDesign.setDescription("数据新增出现未知错误");
         } else if (e instanceof FileUploadException){
