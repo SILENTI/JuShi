@@ -45,4 +45,22 @@ public class AddressController  {
         return new JsonResult<List<Address>>(addresses,"收货地址新建成功");
     }
 
+    /**
+     * 根据uid获取该用户所有address
+     * @param session
+     * @return
+     */
+    @RequestMapping("/show_address")
+    public JsonResult<List<Address>> showAddress ( HttpSession session ){
+
+        //获取uid
+        User user = (User) session.getAttribute("user");
+        Integer uid = user.getUid();
+
+        //获取address列表
+        List<Address> addresses = addressService.findAllAddress(uid);
+
+       return new JsonResult<List<Address>>(addresses,"当前用户收货地址获取成功");
+    }
+
 }

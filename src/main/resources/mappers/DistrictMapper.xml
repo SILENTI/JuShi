@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.jushi.mapper.DistrictMapper">
+
   <resultMap id="BaseResultMap" type="com.example.jushi.model.District">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="parent" jdbcType="VARCHAR" property="parent" />
     <result column="code" jdbcType="VARCHAR" property="code" />
     <result column="name" jdbcType="VARCHAR" property="name" />
   </resultMap>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from district
     where id = #{id,jdbcType=INTEGER}
@@ -36,7 +38,12 @@
 
     <!--跟根据parent获取所有的信息-->
     <select id="selectByParent" resultMap="BaseResultMap">
-      select * from district where parent = #{parent,jdbcType=VARCHAR}
+      select * from district where parent = #{parent,jdbcType=VARCHAR} order by name dsc
+    </select>
+
+    <!--根据Code查询省市区的名称-->
+    <select id="selectDistrictNameByCode" resultType="java.lang.String">
+      select name from district where code = #{code,jdbcType=VARCHAR}
     </select>
 
 </mapper>

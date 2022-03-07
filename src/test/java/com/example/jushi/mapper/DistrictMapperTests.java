@@ -32,4 +32,13 @@ public class DistrictMapperTests {
         }
     }
 
+    /**
+     * 根据code查询省市区名称
+     */
+    @Test
+    public void selectDistrictNameByCode (){
+        String name = districtMapper.selectDistrictNameByCode("431226");
+        System.out.println(name);
+    }
+
 }

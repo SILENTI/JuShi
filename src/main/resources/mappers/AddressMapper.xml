@@ -82,7 +82,7 @@
     select aid, uid, name, province_name, province_code, city_name, city_code, area_name, 
     area_code, postal, address, phone, tel, tag, is_default, create_user, create_time, 
     modif_user,modif_time
-    from address where uid = #{uid,jdbcType=INTEGER}
+    from address where uid = #{uid,jdbcType=INTEGER} order by uid DESC , is_default DESC
   </select>
 
   <!--查询用户收货地址的数量-->

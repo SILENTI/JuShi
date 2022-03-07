@@ -39,9 +39,25 @@ public class DistrictServiceImpl implements DistrictService {
         //屏蔽关键信息
         for (District district : districts) {
             district.setId(null);
-            district.setCode(null);
+            district.setParent(null);
         }
 
         return districts;
+    }
+
+    /**
+     * 根据code查询省市区名称
+     * @param code
+     * @return 名称
+     */
+    @Override
+    public String findDistrictName (String code){
+        String name = districtMapper.selectDistrictNameByCode(code);
+
+        if (name == null || name.equals("")){
+            throw new DistrictException("遇到未知原因，查询DistrictName失败");
+        }
+
+        return name;
     }
 }

@@ -19,4 +19,11 @@ public interface DistrictService {
      * @return
      */
     List<District> findDistrict (String parent);
+
+    /**
+     * 根据code查询district名称
+     * @param code
+     * @return
+     */
+    String findDistrictName (String code);
 }

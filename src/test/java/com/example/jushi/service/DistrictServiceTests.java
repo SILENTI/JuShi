@@ -32,4 +32,11 @@ public class DistrictServiceTests {
         }
     }
 
+    /**
+     * 查询DistrictName名称
+     */
+    @Test
+    public void findDistrictName (){
+        System.out.println(districtService.findDistrictName("431226"));
+    }
 }
