@@ -82,6 +82,9 @@ public class BaseController {
         } else if (e instanceof FileEmptyException){
             jsonDesign.setStatus(7050);
             jsonDesign.setDescription("文件为空");
+        } else if (e instanceof  AddressAccessViolationException){
+            jsonDesign.setStatus(7060);
+            jsonDesign.setDescription("非法访问");
         }
         return jsonDesign;
     }

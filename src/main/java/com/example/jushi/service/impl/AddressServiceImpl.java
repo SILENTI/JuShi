@@ -3,6 +3,7 @@ package com.example.jushi.service.impl;
 import com.example.jushi.mapper.AddressMapper;
 import com.example.jushi.model.Address;
 import com.example.jushi.service.AddressService;
+import com.example.jushi.service.ex.AddressAccessViolationException;
 import com.example.jushi.service.ex.AddressNotExistException;
 import com.example.jushi.service.ex.AddressOutOfRangeException;
 import com.example.jushi.service.ex.UpdateException;
@@ -74,8 +75,48 @@ public class AddressServiceImpl implements AddressService {
             throw new AddressNotExistException("查询到的Address信息不存在");
         }
 
+        //除去一些不重要的信息，或者创建Vo实体对象，将Address实体对象转化为Vo对象
+        for (Address address : addresses) {
+            address.setCreateUser(null);
+            address.setCreateTime(null);
+            address.setModifUser(null);
+            address.setModifTime(null);
+        }
+
         return addresses;
     }
 
+    /**
+     * 设置默认收货地址
+     * @param aid
+     * @param uid
+     * @param username
+     */
+    @Override
+    public void changeAddressDefault(Integer aid, Integer uid,String username) {
 
+        //查询当前用户是否有收货地址
+        Address address = addressMapper.selectByPrimaryKey(aid);
+        if (address == null){
+            throw new AddressNotExistException("当前收货地址不存在");
+        }
+
+        //确认所查询到收货地址的用户与传递的用户信息是否一致
+        if (!address.getUid().equals(uid)){
+            throw new AddressAccessViolationException("非法访问");
+        }
+
+        //修改默认收货地址
+        Integer record_not = addressMapper.updateAddressDefaultAllByUid(uid);
+
+        if (record_not == 0) {
+            throw new UpdateException("出现未知错误，数据更新失败");
+        }
+
+        Integer record_is = addressMapper.updateAddressDefaultByAid(aid,username,new Date());
+
+        if (record_not == 0) {
+            throw new UpdateException("出现未知错误，数据更新失败");
+        }
+    }
 }

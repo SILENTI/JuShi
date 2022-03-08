@@ -30,4 +30,12 @@ public class AddressServiceTests {
         addressService.createAddress(15,"梁朝伟",address);
     }
 
+    /**
+     * 修改收货地址的默认地址
+     */
+    @Test
+    public void changeAddressDefault (){
+        addressService.changeAddressDefault(2,14,"鲁路修");
+    }
+
 }

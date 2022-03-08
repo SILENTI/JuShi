@@ -64,7 +64,7 @@
       is_default = #{isDefault,jdbcType=INTEGER},
       create_user = #{createUser,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
-      modif_user = #{modifUser,jdbcType=VARCHAR}
+      modif_user = #{modifUser,jdbcType=VARCHAR},
       modif_time = #{modifTime,jdbcType=TIMESTAMP}
     where aid = #{aid,jdbcType=INTEGER}
   </update>
@@ -91,6 +91,18 @@
     where uid = #{uid,jdbcType=INTEGER}
   </select>
 
+  <!--根据uid将该用户下的所有收货地址设置为非默认-->
+  <update id="updateAddressDefaultAllByUid" >
+    update address set is_default = 0 where uid = #{uid,jdbcType=INTEGER}
+  </update>
 
+  <!--根据aid将当前收货地址设置为默认地址-->
+  <update id="updateAddressDefaultByAid" >
+    update address
+    set is_default = 1 ,
+    modif_user = #{modifUser,jdbcType=VARCHAR},
+    modif_time = #{modifTime,jdbcType=TIMESTAMP}
+    where aid = #{aid,jdbcType=INTEGER}
+  </update>
 
 </mapper>

@@ -63,4 +63,22 @@ public class AddressController  {
        return new JsonResult<List<Address>>(addresses,"当前用户收货地址获取成功");
     }
 
+    /**
+     * 修改默认收货地址
+     * @param aid
+     * @param session
+     * @return
+     */
+    @RequestMapping("/change_default_address")
+    public JsonResult<Void> changeDefaultAddress (Integer aid , HttpSession session){
+
+        //获取user对象
+        User user = (User) session.getAttribute("user");
+
+        //传递数据
+        addressService.changeAddressDefault(aid,user.getUid(), user.getUsername());
+
+        return new JsonResult<>("默认地址修改成功");
+    }
+
 }

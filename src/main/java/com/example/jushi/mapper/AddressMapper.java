@@ -3,6 +3,7 @@ package com.example.jushi.mapper;
 import com.example.jushi.model.Address;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.Date;
 import java.util.List;
 
 
@@ -11,7 +12,6 @@ import java.util.List;
  * @Mapper 作用就是将xml文件和接口进行配对，然后生成Bean进行注册
  */
 @Mapper
-
 public interface AddressMapper {
 
     /**
@@ -34,6 +34,24 @@ public interface AddressMapper {
      * @return
      */
     List<Address> selectAllByUid (Integer uid);
+
+    /**
+     * 根据用户名查询到当前用户下的所有的收货地址，并将其设置为非默认地址
+     * @param uid
+     * @return 返回修改的记录
+     */
+    Integer updateAddressDefaultAllByUid (Integer uid);
+
+    /**
+     * 根据aid查询到收货地址信息，并将其设置为默认地址
+     * @parem aid
+     * @param modifUser
+     * @param modifTime
+     * @return 返回修改的记录
+     */
+    Integer updateAddressDefaultByAid (Integer aid, String modifUser, Date modifTime);
+
+
 
     int deleteByPrimaryKey(Integer aid);
 

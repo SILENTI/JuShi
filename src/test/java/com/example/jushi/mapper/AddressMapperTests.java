@@ -54,4 +54,20 @@ public class AddressMapperTests {
         }
     }
 
+    /**
+     * 将当前用户的所有收货地址设置为非默认
+     */
+    @Test
+    public void addressNotDefault (){
+        System.out.println("更改的数据："+addressMapper.updateAddressDefaultAllByUid(14));
+    }
+
+    /**
+     * 根据aid将当前用户的收货地址设置为默认收货地址
+     */
+    @Test
+    public void addressDefault (){
+//        System.out.println("更改的数据："+addressMapper.updateAddressDefaultByAid(4));
+    }
+
 }

@@ -28,5 +28,12 @@ public interface AddressService {
      */
     List<Address> findAllAddress (Integer uid);
 
+    /**
+     * 设置默认收货地址
+     * @param aid
+     * @param uid
+     * @param username
+     */
+    void changeAddressDefault (Integer aid , Integer uid,String username);
 
 }
