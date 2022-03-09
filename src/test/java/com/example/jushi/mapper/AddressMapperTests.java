@@ -70,4 +70,19 @@ public class AddressMapperTests {
 //        System.out.println("更改的数据："+addressMapper.updateAddressDefaultByAid(4));
     }
 
+    /**
+     * 删除收货地址
+     */
+    @Test
+    public void deleteAddressForUid (){
+        System.out.println("数据修改记录："+ addressMapper.deleteAddressByAid(5));
+    }
+
+    /**
+     * 根据用户id获取最近修改的地址
+     */
+    @Test
+    public void getLatestModifyAddressForUid (){
+        System.out.println("最近修改的收货地址id："+addressMapper.selectLatestModifyAddressByUid(14));
+    }
 }

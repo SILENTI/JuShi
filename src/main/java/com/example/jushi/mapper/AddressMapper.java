@@ -51,11 +51,30 @@ public interface AddressMapper {
      */
     Integer updateAddressDefaultByAid (Integer aid, String modifUser, Date modifTime);
 
+    /**
+     * 删除收货地址根据aid
+     * @param aid
+     * @return
+     */
+    Integer deleteAddressByAid(Integer aid);
 
+    /**
+     * 更具aid查询当前收货地址
+     * @param aid
+     * @return address 实体对象
+     */
+    Address selectAddressByAid(Integer aid);
 
-    int deleteByPrimaryKey(Integer aid);
+    /**
+     * 根据用户id获取最新修改的收货地址
+     * @param uid
+     * @return
+     */
+    Integer selectLatestModifyAddressByUid (Integer uid);
 
-    Address selectByPrimaryKey(Integer aid);
-
+    /**
+     * @param record
+     * @return
+     */
     int updateByPrimaryKey(Address record);
 }

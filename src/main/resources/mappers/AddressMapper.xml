@@ -22,29 +22,31 @@
     <result column="modif_user" jdbcType="VARCHAR" property="modifUser" />
     <result column="modif_time" jdbcType="TIMESTAMP" property="modifTime" />
   </resultMap>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from address
-    where aid = #{aid,jdbcType=INTEGER}
-  </delete>
+
 
   <!--新增用户收货地址-->
   <insert id="insert" parameterType="com.example.jushi.model.Address">
-    insert into address (aid, uid, name, 
-      province_name, province_code, city_name, 
-      city_code, area_name, area_code, 
-      postal, address, phone, 
-      tel, tag, is_default, 
-      create_user, create_time, modif_user, modif_time
-      )
-    values (#{aid,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
-      #{provinceName,jdbcType=VARCHAR}, #{provinceCode,jdbcType=CHAR}, #{cityName,jdbcType=VARCHAR}, 
-      #{cityCode,jdbcType=CHAR}, #{areaName,jdbcType=VARCHAR}, #{areaCode,jdbcType=CHAR}, 
-      #{postal,jdbcType=CHAR}, #{address,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
-      #{tel,jdbcType=VARCHAR}, #{tag,jdbcType=VARCHAR}, #{isDefault,jdbcType=INTEGER}, 
-      #{createUser,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{modifUser,jdbcType=VARCHAR},#{modifTime,jdbcType=TIMESTAMP}
-      )
+    insert into address (aid, uid, name,
+    province_name, province_code, city_name,
+    city_code, area_name, area_code,
+    postal, address, phone,
+    tel, tag, is_default,
+    create_user, create_time, modif_user, modif_time
+    )
+    values (#{aid,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},
+    #{provinceName,jdbcType=VARCHAR}, #{provinceCode,jdbcType=CHAR}, #{cityName,jdbcType=VARCHAR},
+    #{cityCode,jdbcType=CHAR}, #{areaName,jdbcType=VARCHAR}, #{areaCode,jdbcType=CHAR},
+    #{postal,jdbcType=CHAR}, #{address,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR},
+    #{tel,jdbcType=VARCHAR}, #{tag,jdbcType=VARCHAR}, #{isDefault,jdbcType=INTEGER},
+    #{createUser,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{modifUser,jdbcType=VARCHAR},#{modifTime,jdbcType=TIMESTAMP}
+    )
   </insert>
 
+  <!--根据aid删除Address收货地址-->
+  <delete id="deleteAddressByAid" parameterType="java.lang.Integer">
+    delete from address
+    where aid = #{aid,jdbcType=INTEGER}
+  </delete>
 
   <update id="updateByPrimaryKey" parameterType="com.example.jushi.model.Address">
     update address
@@ -69,9 +71,10 @@
     where aid = #{aid,jdbcType=INTEGER}
   </update>
 
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select aid, uid, name, province_name, province_code, city_name, city_code, area_name, 
-    area_code, postal, address, phone, tel, tag, is_default, create_user, create_time, 
+  <!--更具aid获取收货地址address对象-->
+  <select id="selectAddressByAid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select aid, uid, name, province_name, province_code, city_name, city_code, area_name,
+    area_code, postal, address, phone, tel, tag, is_default, create_user, create_time,
     modif_user,modif_time
     from address
     where aid = #{aid,jdbcType=INTEGER}
@@ -79,8 +82,8 @@
 
   <!--根据用户id查询到所有的收货地址信息-->
   <select id="selectAllByUid" resultMap="BaseResultMap">
-    select aid, uid, name, province_name, province_code, city_name, city_code, area_name, 
-    area_code, postal, address, phone, tel, tag, is_default, create_user, create_time, 
+    select aid, uid, name, province_name, province_code, city_name, city_code, area_name,
+    area_code, postal, address, phone, tel, tag, is_default, create_user, create_time,
     modif_user,modif_time
     from address where uid = #{uid,jdbcType=INTEGER} order by uid DESC , is_default DESC
   </select>
@@ -104,5 +107,10 @@
     modif_time = #{modifTime,jdbcType=TIMESTAMP}
     where aid = #{aid,jdbcType=INTEGER}
   </update>
+
+  <!--根据uid获取用户最新修改的收货地址-->
+  <select id="selectLatestModifyAddressByUid" resultType="java.lang.Integer">
+    select aid from address where uid = #{uid,jdbcType=INTEGER} ORDER BY modif_time DESC LIMIT 1
+  </select>
 
 </mapper>

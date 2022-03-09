@@ -38,4 +38,12 @@ public class AddressServiceTests {
         addressService.changeAddressDefault(2,14,"鲁路修");
     }
 
+    /**
+     * 删除收货地址
+     * */
+    @Test
+    public void deleteAddress (){
+        addressService.deleteAddress(1,14,"断舍离");
+    }
+
 }

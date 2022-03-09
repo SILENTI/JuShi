@@ -36,4 +36,12 @@ public interface AddressService {
      */
     void changeAddressDefault (Integer aid , Integer uid,String username);
 
+    /**
+     * 删除收货地址
+     * @param aid
+     * @param uid
+     * @param username
+     */
+    void deleteAddress (Integer aid,Integer uid,String username);
+
 }
