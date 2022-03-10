@@ -128,6 +128,7 @@ public class AddressServiceImpl implements AddressService {
 
         //更具aid查询当前收货地址是否存在，并判断uid是否相同
         Address address = addressMapper.selectAddressByAid(aid);
+
         if (address == null){
             throw new AddressNotExistException("该收货地址不存在");
         }
@@ -148,7 +149,7 @@ public class AddressServiceImpl implements AddressService {
         }
 
         //若删除的为默认收货地址，将最近修改的地址为默认地址
-        if (address.getIsDefault().equals(1)){
+        if (!address.getIsDefault().equals(1)){
             Integer newDefaultAddress = addressMapper.selectLatestModifyAddressByUid(uid);
             Integer record = addressMapper.updateAddressDefaultByAid(newDefaultAddress,username,new Date());
             if (record == null ) {

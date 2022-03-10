@@ -1,7 +1,6 @@
 package com.example.jushi.mapper;
 
 import com.example.jushi.model.Goods;
-import com.example.jushi.model.SeckillData;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -12,24 +11,18 @@ import java.util.List;
 @Mapper
 public interface GoodsMapper {
 
-    /**
-     * 根据id，查询指定商品的信息
-     * @param id
-     * @return Goods
-     * */
+
+    int deleteByPrimaryKey(Integer id);
+
+    int insert(Goods record);
+
     Goods selectByPrimaryKey(Integer id);
 
     /**
-     * 查询到所有的商品信息
-     * @return List<Goods>
-     * */
-    List<Goods> selectAll();
+     * 展示所用的商品，更具商品的销售量
+     * @return
+     */
+    List<Goods> selectAllGoods();
 
-//    int deleteByPrimaryKey(Integer id);
-//
-//    int insert(Goods record);
-//
-//    int updateByPrimaryKey(Goods record);
-
-
+    int updateByPrimaryKey(Goods record);
 }

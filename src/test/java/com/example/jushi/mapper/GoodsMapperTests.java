@@ -1,0 +1,35 @@
+package com.example.jushi.mapper;
+
+import com.example.jushi.model.Goods;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.List;
+
+/**
+ * @author 居無何
+ * date: 2022/3/10 9:32
+ * Description: GoodsMapper测试类
+ */
+@SpringBootTest
+@RunWith(SpringRunner.class)
+public class GoodsMapperTests {
+
+    @Autowired
+    private GoodsMapper goodsMapper;
+
+    /**
+     * 根据商品销售量获取商品的列表
+     * */
+    @Test
+    public void selectAllGoods (){
+        List<Goods> goods = goodsMapper.selectAllGoods();
+        for (Goods good : goods) {
+            System.out.println(good.toString());
+        }
+    }
+
+}

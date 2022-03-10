@@ -1,26 +1,22 @@
 package com.example.jushi.service;
 
 import com.example.jushi.model.Goods;
-import com.example.jushi.model.SeckillData;
-import com.example.jushi.vo.GoodsVo;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 /**
  * @author 居無何
+ * date: 2022/3/10 9:45
+ * Description: 商品模块的业务层
  */
+@Service
 public interface GoodsService {
 
     /**
-     * 商品展示，获取所有的商品信息
-     * @return List<GoodsVo>
-     * */
-    List<GoodsVo> goodsShowAll ();
+     * 热销商品展示
+     * @return 热销商品列表
+     */
+    List<Goods> goodsDisplay ();
 
-    /**
-     * 根据gId，获取该商品详细信息
-     * @param gId
-     * @return SeckillData
-     * */
-    SeckillData findSeckillOfGoodsInfo(Integer gId);
 }

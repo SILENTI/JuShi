@@ -93,7 +93,6 @@ public class AddressController  {
         //获取user对象
         User user = (User) session.getAttribute("user");
 
-
         //调用addressService 方法
         addressService.deleteAddress(aid,user.getUid(),user.getUsername());
 
