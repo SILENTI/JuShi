@@ -3,6 +3,7 @@ package com.example.jushi.service.impl;
 
 import com.example.jushi.mapper.GoodsMapper;
 import com.example.jushi.model.Goods;
+import com.example.jushi.model.Trolley;
 import com.example.jushi.service.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,4 +30,5 @@ public class GoodsServiceImpl implements GoodsService {
 
         return goodsList;
     }
+
 }
