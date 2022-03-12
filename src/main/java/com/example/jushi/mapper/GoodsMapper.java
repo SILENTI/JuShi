@@ -3,6 +3,7 @@ package com.example.jushi.mapper;
 import com.example.jushi.model.Goods;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -23,6 +24,13 @@ public interface GoodsMapper {
      * @return
      */
     List<Goods> selectAllGoods();
+
+    /**
+     * 根据商品id查询，该商品的单价
+     * @param gid
+     * @return
+     */
+    BigDecimal selectPriceByGid (Integer gid);
 
     int updateByPrimaryKey(Goods record);
 }

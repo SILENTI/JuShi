@@ -64,4 +64,9 @@
     from goods order by g_state DESC limit 0,10
   </select>
 
+  <!--获取商品的单价-->
+  <select id="selectPriceByGid" resultType="java.math.BigDecimal">
+    select g_price from goods where g_id = #{gid,jdbcType=INTEGER}
+  </select>
+
 </mapper>

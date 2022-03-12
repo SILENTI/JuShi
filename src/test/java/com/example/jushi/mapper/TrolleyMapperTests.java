@@ -1,6 +1,7 @@
 package com.example.jushi.mapper;
 
 import com.example.jushi.model.Trolley;
+import com.example.jushi.vo.TrolleyVo;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author 居無何
@@ -30,7 +32,7 @@ public class TrolleyMapperTests {
     public void insertTrolley (){
         Trolley trolley = new Trolley();
         trolley.setUid(14);
-        trolley.setGid(6);
+        trolley.setGid(3);
         trolley.setCreateTime(new Date());
         Integer record = trolleyMapper.insertTrolley(trolley);
         System.out.println("添加的记录："+record);
@@ -41,7 +43,7 @@ public class TrolleyMapperTests {
     */
     @Test
     public void updateNumByTid (){
-        System.out.println(trolleyMapper.updateNumByTid(2,3,"断舍",new Timestamp(new Date().getTime())));
+        System.out.println(trolleyMapper.updateNumByTid(2,3,"断舍离",new Timestamp(new Date().getTime())));
     }
 
     /**
@@ -65,6 +67,17 @@ public class TrolleyMapperTests {
         trolley.setNum(1);
         Integer record = trolleyMapper.updateNumForTrolleyByTid(trolley);
         System.out.println("数据修改记录："+record);
+    }
+
+    /**
+     * 获取购物车列表
+     */
+    @Test
+    public void selectTrolleyVoByUid (){
+        List<TrolleyVo> trolleyVos = trolleyMapper.selectTrolleyVoByUid(15);
+        for (TrolleyVo trolleyVo : trolleyVos) {
+            System.out.println(trolleyVo.toString());
+        }
     }
 
 }

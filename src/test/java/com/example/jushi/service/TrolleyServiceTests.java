@@ -23,7 +23,7 @@ public class TrolleyServiceTests {
      * */
     @Test
     public void addGoodsTrolley (){
-        trolleyService.addGoodsTrolley(4,10,15,"断舍");
+        trolleyService.addGoodsTrolley(1,10,15,"南卿%");
     }
 
 

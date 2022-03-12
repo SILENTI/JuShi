@@ -32,4 +32,12 @@ public class GoodsMapperTests {
         }
     }
 
+    /**
+     * 根据gid获取商品的价格
+     */
+    @Test
+    public void getPriceByGid (){
+            System.out.println(goodsMapper.selectPriceByGid(4));
+    }
+
 }

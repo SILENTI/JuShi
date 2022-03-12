@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.jushi.mapper.TrolleyMapper">
+
+  <resultMap id="BaseResultMap" type="com.example.jushi.model.Trolley">
+    <id column="tid" jdbcType="INTEGER" property="tid" />
+    <result column="uid" jdbcType="INTEGER" property="uid" />
+    <result column="gid" jdbcType="INTEGER" property="gid" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="num" jdbcType="INTEGER" property="num" />
+    <result column="created_user" jdbcType="VARCHAR" property="createdUser" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="modif_user" jdbcType="VARCHAR" property="modifUser" />
+    <result column="modif_time" jdbcType="TIMESTAMP" property="modifTime" />
+  </resultMap>
+
+
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from trolley
+    where tid = #{tid,jdbcType=INTEGER}
+  </delete>
+
+  <!--将商品加入购物车-->
+  <insert id="insertTrolley" parameterType="com.example.jushi.model.Trolley">
+    insert into trolley (tid, uid, gid, 
+      price, num, created_user, 
+      create_time, modif_user, modif_time
+      )
+    values (#{tid,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, #{gid,jdbcType=INTEGER}, 
+      #{price,jdbcType=DECIMAL}, #{num,jdbcType=INTEGER}, #{createdUser,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{modifUser,jdbcType=VARCHAR}, #{modifTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+
+  <update id="updateByPrimaryKey" parameterType="com.example.jushi.model.Trolley">
+    update trolley
+    set uid = #{uid,jdbcType=INTEGER},
+      gid = #{gid,jdbcType=INTEGER},
+      price = #{price,jdbcType=DECIMAL},
+      num = #{num,jdbcType=INTEGER},
+      created_user = #{createdUser,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modif_user = #{modifUser,jdbcType=VARCHAR},
+      modif_time = #{modifTime,jdbcType=TIMESTAMP}
+    where tid = #{tid,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select tid, uid, gid, price, num, created_user, create_time, modif_user, modif_time
+    from trolley
+    where tid = #{tid,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select tid, uid, gid, price, num, created_user, create_time, modif_user, modif_time
+    from trolley
+  </select>
+
+  <!--根据tid修改购物车中商品的数量-->
+  <update id="updateNumByTid">
+    update trolley
+    set num = #{num,jdbcType=INTEGER},
+    modif_user = #{modifUser,jdbcType=VARCHAR},
+    modif_time = #{modifTime,jdbcType=TIMESTAMP}
+    where tid = #{tid,jdbcType=INTEGER}
+  </update>
+
+  <!--查询当前商品是否已加入购物车-->
+  <select id="selectTrolleyByUidAndGid" resultMap="BaseResultMap">
+    select tid, uid, gid, price, num, created_user, create_time, modif_user, modif_time
+    from trolley
+    where uid = #{uid,jdbcType=INTEGER} and gid = #{gid,jdbcType=INTEGER}
+  </select>
+
+  <!--根据trolley对象，更新num数据-->
+  <update id="updateNumForTrolleyByTid" parameterType="com.example.jushi.model.Trolley">
+    update trolley
+    set num = #{num,jdbcType=INTEGER},
+        modif_user = #{modifUser,jdbcType=VARCHAR},
+        modif_time = #{modifTime,jdbcType=TIMESTAMP}
+    where tid = #{tid,jdbcType=INTEGER}
+  </update>
+
+  <resultMap id="BaseResultTrolleyVoMap" type="com.example.jushi.vo.TrolleyVo">
+    <id column="tid" jdbcType="INTEGER" property="tid" />
+    <result column="uid" jdbcType="INTEGER" property="uid" />
+    <result column="gid" jdbcType="INTEGER" property="gid" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="num" jdbcType="INTEGER" property="num" />
+    <result column="goodsName" jdbcType="VARCHAR"  property="goodsName"/>
+    <result column="realPrice" jdbcType="DECIMAL" property="realPrice"/>
+    <result column="goodsDescribe" jdbcType="VARCHAR"  property="goddsDescribe"/>
+  </resultMap>
+
+  <!--根据获取购物车列表-->
+  <select id="selectTrolleyVoByUid" resultType="com.example.jushi.vo.TrolleyVo" >
+    SELECT uid,gid,tid,trolley.price,trolley.num,goods.g_name AS goodsName,goods.g_price AS realPrice,goods.g_describe AS goodsDescribe
+    FROM
+      trolley
+        LEFT OUTER JOIN goods ON trolley.gid = goods.g_id
+    WHERE
+      uid = #{uid,jdbcType=INTEGER}
+    ORDER BY
+      trolley.create_time DESC
+  </select>
+
+
+</mapper>
