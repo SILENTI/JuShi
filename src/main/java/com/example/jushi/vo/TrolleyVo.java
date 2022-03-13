@@ -81,11 +81,11 @@ public class TrolleyVo {
         this.realPrice = realPrice;
     }
 
-    public String getgoodsDescribe() {
+    public String getGoodsDescribe() {
         return goodsDescribe;
     }
 
-    public void setgoodsDescribe(String goodsDescribe) {
+    public void setGoodsDescribe(String goodsDescribe) {
         this.goodsDescribe = goodsDescribe;
     }
 

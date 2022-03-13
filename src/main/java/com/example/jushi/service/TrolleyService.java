@@ -29,4 +29,11 @@ public interface TrolleyService {
      */
     List<TrolleyVo> selectAllTrolleyVo (Integer uid);
 
+    /**
+     * 购物车多选
+     * @param tid
+     * @return
+     */
+    List<TrolleyVo> selectTrolleyVoByTid (Integer [] tid);
+
 }

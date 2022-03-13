@@ -54,4 +54,15 @@ public class TrolleyController {
 
         return new JsonResult<>(trolleyVos,"数据获取成功");
     }
+
+    /**
+     * 获取所有的已勾选得到购物车商品
+     * @param tid
+     * @return
+     */
+    @RequestMapping("/get_select_trolley")
+    public JsonResult<List<TrolleyVo>> getTrolleyVo (Integer [] tid){
+        List<TrolleyVo> trolleyVos = trolleyService.selectTrolleyVoByTid(tid);
+        return new JsonResult<List<TrolleyVo>>(trolleyVos,"数据获取成功");
+    }
 }

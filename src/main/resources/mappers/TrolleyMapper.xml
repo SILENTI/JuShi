@@ -15,7 +15,6 @@
   </resultMap>
 
 
-
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from trolley
     where tid = #{tid,jdbcType=INTEGER}
@@ -88,11 +87,11 @@
     <result column="num" jdbcType="INTEGER" property="num" />
     <result column="goodsName" jdbcType="VARCHAR"  property="goodsName"/>
     <result column="realPrice" jdbcType="DECIMAL" property="realPrice"/>
-    <result column="goodsDescribe" jdbcType="VARCHAR"  property="goddsDescribe"/>
+    <result column="goodsDescribe" jdbcType="VARCHAR"  property="goodsDescribe"/>
   </resultMap>
 
   <!--根据获取购物车列表-->
-  <select id="selectTrolleyVoByUid" resultType="com.example.jushi.vo.TrolleyVo" >
+  <select id="selectTrolleyVoByUid" resultMap="BaseResultTrolleyVoMap" resultType="com.example.jushi.vo.TrolleyVo" >
     SELECT uid,gid,tid,trolley.price,trolley.num,goods.g_name AS goodsName,goods.g_price AS realPrice,goods.g_describe AS goodsDescribe
     FROM
       trolley
@@ -103,5 +102,26 @@
       trolley.create_time DESC
   </select>
 
+  <!--商品多选-->
+  <select id="selectTrolleyVo" resultMap="BaseResultTrolleyVoMap" >
+    SELECT
+    trolley.tid,
+    trolley.uid,
+    trolley.gid,
+    trolley.price,
+    trolley.num,
+    goods.g_name AS goodsName,
+    goods.g_price AS realPrice,
+    goods.g_describe AS goodsDescribe
+    FROM
+    trolley
+    LEFT JOIN
+    goods
+    ON
+    trolley.gid = goods.g_id
+    WHERE
+    trolley.tid IN (<foreach collection="array" item="tid" separator=",">#{tid,jdbcType=INTEGER}</foreach> )
+
+  </select>
 
 </mapper>

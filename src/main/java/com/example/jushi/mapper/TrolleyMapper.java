@@ -52,6 +52,14 @@ public interface TrolleyMapper {
      */
     List<TrolleyVo> selectTrolleyVoByUid (Integer uid);
 
+    /**
+     * 购物车商品多选
+     * @param tid
+     * @return
+     */
+    List<TrolleyVo> selectTrolleyVo (Integer [] tid);
+
+
     int deleteByPrimaryKey(Integer tid);
 
     Trolley selectByPrimaryKey(Integer tid);

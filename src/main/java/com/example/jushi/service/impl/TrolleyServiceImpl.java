@@ -89,4 +89,17 @@ public class TrolleyServiceImpl implements TrolleyService {
 
         return trolleyVos;
     }
+
+    /**
+     * 购物车多选商品
+     * @param tid
+     * @return
+     */
+    @Override
+    public List<TrolleyVo> selectTrolleyVoByTid(Integer[] tid) {
+
+        List<TrolleyVo> trolleyVos = trolleyMapper.selectTrolleyVo(tid);
+
+        return trolleyVos;
+    }
 }

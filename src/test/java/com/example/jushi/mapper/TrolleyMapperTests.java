@@ -10,6 +10,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -75,6 +76,17 @@ public class TrolleyMapperTests {
     @Test
     public void selectTrolleyVoByUid (){
         List<TrolleyVo> trolleyVos = trolleyMapper.selectTrolleyVoByUid(15);
+        for (TrolleyVo trolleyVo : trolleyVos) {
+            System.out.println(trolleyVo.toString());
+        }
+    }
+
+    /**
+     * 购物车商品多选
+     */
+    @Test
+    public void selectTrolleys () {
+        List<TrolleyVo> trolleyVos = trolleyMapper.selectTrolleyVo( new Integer[]{2,3,4,5});
         for (TrolleyVo trolleyVo : trolleyVos) {
             System.out.println(trolleyVo.toString());
         }
