@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.jushi.mapper.OrderItemMapper">
+  <resultMap id="BaseResultMap" type="com.example.jushi.model.OrderItem">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="oid" jdbcType="INTEGER" property="oid" />
+    <result column="gid" jdbcType="INTEGER" property="gid" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="image" jdbcType="VARCHAR" property="image" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="num" jdbcType="INTEGER" property="num" />
+    <result column="create_user" jdbcType="VARCHAR" property="createUser" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="modif_user" jdbcType="VARCHAR" property="modifUser" />
+    <result column="modif_time" jdbcType="TIMESTAMP" property="modifTime" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from order_item
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <!--新增OrderItem数据-->
+  <insert id="insertOrderItem" parameterType="com.example.jushi.model.OrderItem">
+    insert into order_item (id, oid, gid,
+      title, image, price, 
+      num, create_user, create_time, 
+      modif_user, modif_time)
+    values (#{id,jdbcType=INTEGER}, #{oid,jdbcType=INTEGER}, #{gid,jdbcType=INTEGER},
+      #{title,jdbcType=VARCHAR}, #{image,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, 
+      #{num,jdbcType=INTEGER}, #{createUser,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{modifUser,jdbcType=VARCHAR}, #{modifTime,jdbcType=TIMESTAMP})
+  </insert>
+
+  <update id="updateByPrimaryKey" parameterType="com.example.jushi.model.OrderItem">
+    update order_item
+    set oid = #{oid,jdbcType=INTEGER},
+      gid = #{gid,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      image = #{image,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DECIMAL},
+      num = #{num,jdbcType=INTEGER},
+      create_user = #{createUser,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modif_user = #{modifUser,jdbcType=VARCHAR},
+      modif_time = #{modifTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, oid, gid, title, image, price, num, create_user, create_time, modif_user,
+    modif_time
+    from order_item
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, oid, gid, title, image, price, num, create_user, create_time, modif_user,
+    modif_time
+    from order_item
+  </select>
+</mapper>

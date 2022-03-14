@@ -31,4 +31,13 @@ public class GoodsServiceImpl implements GoodsService {
         return goodsList;
     }
 
+    /**
+     * 获取Goods信息
+     * @param gid
+     * @return
+     */
+    @Override
+    public Goods selectGoodsByGid(Integer gid) {
+        return goodsMapper.selectGoodsByGid(gid);
+    }
 }

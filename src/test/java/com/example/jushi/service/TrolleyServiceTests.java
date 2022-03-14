@@ -1,5 +1,6 @@
 package com.example.jushi.service;
 
+import com.example.jushi.model.Trolley;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,5 +27,13 @@ public class TrolleyServiceTests {
         trolleyService.addGoodsTrolley(1,10,15,"南卿%");
     }
 
+    /**
+     * 根据获取Trolley对象
+     */
+    @Test
+    public void selectTrolley (){
+        Trolley trolley = trolleyService.selectTrolleyByTid(2,14);
+        System.out.println(trolley.toString());
+    }
 
 }

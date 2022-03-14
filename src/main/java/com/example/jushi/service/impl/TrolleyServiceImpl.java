@@ -4,6 +4,7 @@ import com.example.jushi.mapper.GoodsMapper;
 import com.example.jushi.mapper.TrolleyMapper;
 import com.example.jushi.model.Trolley;
 import com.example.jushi.service.TrolleyService;
+import com.example.jushi.service.ex.IllegalAccessException;
 import com.example.jushi.service.ex.InsertException;
 import com.example.jushi.service.ex.UpdateException;
 import com.example.jushi.vo.TrolleyVo;
@@ -101,5 +102,30 @@ public class TrolleyServiceImpl implements TrolleyService {
         List<TrolleyVo> trolleyVos = trolleyMapper.selectTrolleyVo(tid);
 
         return trolleyVos;
+    }
+
+    @Override
+    public Trolley selectTrolleyByTid(Integer tid, Integer uid){
+
+        Trolley trolley = trolleyMapper.selectTrolleyByTid(tid);
+
+        if (!trolley.getUid().equals(uid)){
+            throw new IllegalAccessException("非法访问");
+        }
+
+        return trolley;
+    }
+
+    /**
+     * 获取trolley对象组
+     * @param tid
+     * @return
+     */
+    @Override
+    public List<Trolley> selectTrolleyByTid(Integer[] tid) {
+
+        List<Trolley> trolleys = trolleyMapper.selectTrolleyByArrayTid(tid);
+
+        return trolleys;
     }
 }

@@ -92,4 +92,24 @@ public class TrolleyMapperTests {
         }
     }
 
+    /**
+     * 获取trolley对象
+     */
+    @Test
+    public void selectTrolley () {
+        Trolley trolley = trolleyMapper.selectTrolleyByTid(2);
+        System.out.println(trolley.toString());
+    }
+
+    /**
+     * 获取trolley对象组
+     */
+    @Test
+    public void selectTrolleyByTid () {
+        List<Trolley> trolleys = trolleyMapper.selectTrolleyByArrayTid(new Integer[]{2,3});
+        for (Trolley trolley : trolleys) {
+            System.out.println(trolley.toString());
+        }
+    }
+
 }

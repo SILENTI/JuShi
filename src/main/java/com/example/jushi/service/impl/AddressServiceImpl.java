@@ -156,6 +156,24 @@ public class AddressServiceImpl implements AddressService {
                 throw new UpdateException("遇到未知错误，数据更新失败");
             }
         }
-
     }
+
+    /**
+     * 根据aid查询到address信息
+     * @param aid
+     * @param uid
+     * @return
+     */
+    @Override
+    public Address selectAddressByAid(Integer aid,Integer uid) {
+
+        Address address = addressMapper.selectAddressByAid(aid);
+
+        if (!address.getUid().equals(uid)){
+            throw new AddressAccessViolationException("非法访问");
+        }
+
+        return address;
+    }
+
 }

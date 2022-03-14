@@ -11,14 +11,23 @@ import java.util.List;
 @Mapper
 public interface OrderMapper {
 
-    int deleteByPrimaryKey(Long id);
+    /**
+     * 数据新增
+     * @param record
+     * @return
+     */
+    Integer insertOrder(Order record);
 
-    int insert(Order record);
+    /**
+     * 查询order对象信息
+     * @param oid
+     * @return
+     */
+    Order selectOrderByAid(Integer oid);
 
-    Order selectByPrimaryKey(Long id);
+    int deleteByPrimaryKey(Integer oid);
 
     List<Order> selectAll();
 
     int updateByPrimaryKey(Order record);
-
 }

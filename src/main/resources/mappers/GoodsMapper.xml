@@ -50,7 +50,9 @@
       modif_time = #{modifTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+
+  <!--获取Goods根据gid-->
+  <select id="selectGoodsByGid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select id, g_id, g_name, g_type, g_price, g_img, g_stock, g_sales, g_describe, g_state, 
     create_user, create_time, modif_user, modif_time
     from goods

@@ -85,4 +85,15 @@ public class AddressMapperTests {
     public void getLatestModifyAddressForUid (){
         System.out.println("最近修改的收货地址id："+addressMapper.selectLatestModifyAddressByUid(14));
     }
+
+    /**
+     * 根据aid，获取address对象
+     */
+    @Test
+    public void selectAddressByAid (){
+        Address address = addressMapper.selectAddressByAid(2);
+        System.out.println(address.toString());
+    }
+
+
 }

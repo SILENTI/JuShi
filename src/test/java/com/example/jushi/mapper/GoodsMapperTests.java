@@ -40,4 +40,12 @@ public class GoodsMapperTests {
             System.out.println(goodsMapper.selectPriceByGid(4));
     }
 
+    /**
+     * 获取goods
+     */
+    @Test
+    public void selectGoodsByGid (){
+        System.out.println(goodsMapper.selectGoodsByGid(1).toString());
+    }
+
 }

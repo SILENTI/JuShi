@@ -19,4 +19,11 @@ public interface GoodsService {
      */
     List<Goods> goodsDisplay ();
 
+    /**
+     * 获取Goods对象信息
+     * @param gid
+     * @return
+     */
+    Goods selectGoodsByGid (Integer gid);
+
 }

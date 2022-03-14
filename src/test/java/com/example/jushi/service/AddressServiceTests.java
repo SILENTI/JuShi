@@ -46,4 +46,12 @@ public class AddressServiceTests {
         addressService.deleteAddress(1,14,"断舍离");
     }
 
+    /**
+     * 更具aid获取address对象
+     */
+    @Test
+    public void selectAddress(){
+        Address address = addressService.selectAddressByAid(2,14);
+        System.out.println(address.toString());
+    }
 }

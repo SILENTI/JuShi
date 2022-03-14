@@ -1,5 +1,6 @@
 package com.example.jushi.service;
 
+import com.example.jushi.model.Trolley;
 import com.example.jushi.vo.TrolleyVo;
 import org.springframework.stereotype.Service;
 
@@ -35,5 +36,20 @@ public interface TrolleyService {
      * @return
      */
     List<TrolleyVo> selectTrolleyVoByTid (Integer [] tid);
+
+    /**
+     * 根据提tid获取trolley对象
+     * @param tid
+     * @param uid
+     * @return
+     */
+    Trolley selectTrolleyByTid (Integer tid,Integer uid);
+
+    /**
+     * 获取指定的trolley对象
+     * @param tid
+     * @return
+     */
+    List<Trolley> selectTrolleyByTid (Integer [] tid);
 
 }

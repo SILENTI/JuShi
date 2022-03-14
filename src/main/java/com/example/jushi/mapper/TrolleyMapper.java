@@ -59,10 +59,21 @@ public interface TrolleyMapper {
      */
     List<TrolleyVo> selectTrolleyVo (Integer [] tid);
 
+    /**
+     * 根据tid获取trolley对
+     * @param tid
+     * @return
+     */
+    Trolley selectTrolleyByTid (Integer tid);
+
+    /**
+     * 根据tid获取到对象组
+     * @param tid
+     * @return
+     */
+    List<Trolley> selectTrolleyByArrayTid (Integer [] tid);
 
     int deleteByPrimaryKey(Integer tid);
-
-    Trolley selectByPrimaryKey(Integer tid);
 
     List<Trolley> selectAll();
 

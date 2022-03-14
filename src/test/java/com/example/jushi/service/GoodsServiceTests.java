@@ -32,4 +32,9 @@ public class GoodsServiceTests {
         }
     }
 
+    @Test
+    public void getGoods () {
+        System.out.println(goodsService.selectGoodsByGid(1).toString());
+    }
+
 }

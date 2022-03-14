@@ -44,11 +44,14 @@
       modif_time = #{modifTime,jdbcType=TIMESTAMP}
     where tid = #{tid,jdbcType=INTEGER}
   </update>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+
+  <!--根据替代获取trolley对象-->
+  <select id="selectTrolleyByTid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select tid, uid, gid, price, num, created_user, create_time, modif_user, modif_time
     from trolley
     where tid = #{tid,jdbcType=INTEGER}
   </select>
+
   <select id="selectAll" resultMap="BaseResultMap">
     select tid, uid, gid, price, num, created_user, create_time, modif_user, modif_time
     from trolley
@@ -122,6 +125,24 @@
     WHERE
     trolley.tid IN (<foreach collection="array" item="tid" separator=",">#{tid,jdbcType=INTEGER}</foreach> )
 
+  </select>
+
+  <!--获取trolley对象组-->
+  <select id="selectTrolleyByArrayTid" resultMap="BaseResultMap">
+    SELECT
+      tid,
+      uid,
+      gid,
+      price,
+      num,
+      created_user,
+      create_time,
+      modif_user,
+      modif_time
+    FROM
+      trolley
+    WHERE
+      tid IN ( <foreach collection="array" item="tid" separator=",">#{tid}</foreach> )
   </select>
 
 </mapper>

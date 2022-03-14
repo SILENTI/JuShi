@@ -1,50 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.jushi.mapper.OrderMapper">
+
   <resultMap id="BaseResultMap" type="com.example.jushi.model.Order">
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="o_id" jdbcType="BIGINT" property="oId" />
-    <result column="o_time" jdbcType="TIMESTAMP" property="oTime" />
-    <result column="o_id_list" jdbcType="VARCHAR" property="oIdList" />
-    <result column="u_id" jdbcType="INTEGER" property="uId" />
-    <result column="o_site" jdbcType="VARCHAR" property="oSite" />
-    <result column="o_remarks" jdbcType="VARCHAR" property="oRemarks" />
-    <result column="received_1" jdbcType="VARCHAR" property="received1" />
-    <result column="received_2" jdbcType="VARCHAR" property="received2" />
+    <id column="oid" jdbcType="INTEGER" property="oid" />
+    <result column="uid" jdbcType="INTEGER" property="uid" />
+    <result column="cnee_name" jdbcType="VARCHAR" property="cneeName" />
+    <result column="cnee_phone" jdbcType="VARCHAR" property="cneePhone" />
+    <result column="cnee_province" jdbcType="VARCHAR" property="cneeProvince" />
+    <result column="cnee_city" jdbcType="VARCHAR" property="cneeCity" />
+    <result column="cnee_district" jdbcType="VARCHAR" property="cneeDistrict" />
+    <result column="cnee_address" jdbcType="VARCHAR" property="cneeAddress" />
+    <result column="total_prices" jdbcType="DECIMAL" property="totalPrices" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="order_time" jdbcType="TIMESTAMP" property="orderTime" />
+    <result column="pay_time" jdbcType="TIMESTAMP" property="payTime" />
+    <result column="create_user" jdbcType="VARCHAR" property="createUser" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="modif_user" jdbcType="VARCHAR" property="modifUser" />
+    <result column="modif_time" jdbcType="TIMESTAMP" property="modifTime" />
   </resultMap>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from order
-    where id = #{id,jdbcType=BIGINT}
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from `order`
+    where oid = #{oid,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.example.jushi.model.Order">
-    insert into order (id, o_id, o_time, 
-      o_id_list, u_id, o_site, 
-      o_remarks, received_1, received_2
-      )
-    values (#{id,jdbcType=BIGINT}, #{oId,jdbcType=BIGINT}, #{oTime,jdbcType=TIMESTAMP}, 
-      #{oIdList,jdbcType=VARCHAR}, #{uId,jdbcType=INTEGER}, #{oSite,jdbcType=VARCHAR}, 
-      #{oRemarks,jdbcType=VARCHAR}, #{received1,jdbcType=VARCHAR}, #{received2,jdbcType=VARCHAR}
-      )
+
+  <!--数据新增，返回主键id-->
+
+  <insert id="insertOrder" parameterType="com.example.jushi.model.Order" useGeneratedKeys="true" keyProperty="oid">
+<!--
+    <selectKey keyProperty="oid" order="AFTER" resultType="java.lang.Integer">
+        SELECT MAX(id) FROM table
+        SELECT LAST_INSERT_ID()
+        SELECT @@IDENTITY
+    </selectKey>
+-->
+    insert into `order` (uid,
+      cnee_name, cnee_phone, cnee_province,
+      cnee_city, cnee_district, cnee_address,
+      total_prices, status, order_time,
+      pay_time, create_user, create_time,
+      modif_user, modif_time)
+    values (#{uid,jdbcType=INTEGER},
+      #{cneeName,jdbcType=VARCHAR}, #{cneePhone,jdbcType=VARCHAR}, #{cneeProvince,jdbcType=VARCHAR},
+      #{cneeCity,jdbcType=VARCHAR}, #{cneeDistrict,jdbcType=VARCHAR}, #{cneeAddress,jdbcType=VARCHAR},
+      #{totalPrices,jdbcType=DECIMAL}, #{status,jdbcType=INTEGER}, #{orderTime,jdbcType=TIMESTAMP},
+      #{payTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
+      #{modifUser,jdbcType=VARCHAR}, #{modifTime,jdbcType=TIMESTAMP})
   </insert>
+
   <update id="updateByPrimaryKey" parameterType="com.example.jushi.model.Order">
-    update order
-    set o_id = #{oId,jdbcType=BIGINT},
-      o_time = #{oTime,jdbcType=TIMESTAMP},
-      o_id_list = #{oIdList,jdbcType=VARCHAR},
-      u_id = #{uId,jdbcType=INTEGER},
-      o_site = #{oSite,jdbcType=VARCHAR},
-      o_remarks = #{oRemarks,jdbcType=VARCHAR},
-      received_1 = #{received1,jdbcType=VARCHAR},
-      received_2 = #{received2,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=BIGINT}
+    update `order`
+    set uid = #{uid,jdbcType=INTEGER},
+      cnee_name = #{cneeName,jdbcType=VARCHAR},
+      cnee_phone = #{cneePhone,jdbcType=VARCHAR},
+      cnee_province = #{cneeProvince,jdbcType=VARCHAR},
+      cnee_city = #{cneeCity,jdbcType=VARCHAR},
+      cnee_district = #{cneeDistrict,jdbcType=VARCHAR},
+      cnee_address = #{cneeAddress,jdbcType=VARCHAR},
+      total_prices = #{totalPrices,jdbcType=DECIMAL},
+      status = #{status,jdbcType=INTEGER},
+      order_time = #{orderTime,jdbcType=TIMESTAMP},
+      pay_time = #{payTime,jdbcType=TIMESTAMP},
+      create_user = #{createUser,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modif_user = #{modifUser,jdbcType=VARCHAR},
+      modif_time = #{modifTime,jdbcType=TIMESTAMP}
+    where oid = #{oid,jdbcType=INTEGER}
   </update>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select id, o_id, o_time, o_id_list, u_id, o_site, o_remarks, received_1, received_2
-    from order
-    where id = #{id,jdbcType=BIGINT}
+
+  <select id="selectOrderByAid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select oid,uid,cnee_name,cnee_phone,cnee_province,cnee_city,cnee_district,
+    cnee_address,total_prices,status,order_time,pay_time,create_user,create_time,
+    modif_user,modif_time
+    from `order`
+    where oid = #{oid,jdbcType=INTEGER}
   </select>
+
   <select id="selectAll" resultMap="BaseResultMap">
-    select id, o_id, o_time, o_id_list, u_id, o_site, o_remarks, received_1, received_2
-    from order
+    select oid, uid, cnee_name, cnee_phone, cnee_province, cnee_city, cnee_district,
+    cnee_address, total_prices, status, order_time, pay_time, create_user, create_time,
+    modif_user, modif_time
+    from `order`
   </select>
 </mapper>

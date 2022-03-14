@@ -17,7 +17,12 @@ public interface GoodsMapper {
 
     int insert(Goods record);
 
-    Goods selectByPrimaryKey(Integer id);
+    /**
+     * 获取goods
+     * @param id
+     * @return
+     */
+    Goods selectGoodsByGid(Integer id);
 
     /**
      * 展示所用的商品，更具商品的销售量

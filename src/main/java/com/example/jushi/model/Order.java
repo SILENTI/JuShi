@@ -1,95 +1,191 @@
 package com.example.jushi.model;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
+/**
+ * @author 居無何
+ */
 public class Order {
-    private Long id;
+    private Integer oid;
 
-    private Long oId;
+    private Integer uid;
 
-    private Date oTime;
+    private String cneeName;
 
-    private String oIdList;
+    private String cneePhone;
 
-    private Integer uId;
+    private String cneeProvince;
 
-    private String oSite;
+    private String cneeCity;
 
-    private String oRemarks;
+    private String cneeDistrict;
 
-    private String received1;
+    private String cneeAddress;
 
-    private String received2;
+    private BigDecimal totalPrices;
 
-    public Long getId() {
-        return id;
+    private Integer status;
+
+    private Date orderTime;
+
+    private Date payTime;
+
+    private String createUser;
+
+    private Date createTime;
+
+    private String modifUser;
+
+    private Date modifTime;
+
+    public Integer getOid() {
+        return oid;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setOid(Integer oid) {
+        this.oid = oid;
     }
 
-    public Long getoId() {
-        return oId;
+    public Integer getUid() {
+        return uid;
     }
 
-    public void setoId(Long oId) {
-        this.oId = oId;
+    public void setUid(Integer uid) {
+        this.uid = uid;
     }
 
-    public Date getoTime() {
-        return oTime;
+    public String getCneeName() {
+        return cneeName;
     }
 
-    public void setoTime(Date oTime) {
-        this.oTime = oTime;
+    public void setCneeName(String cneeName) {
+        this.cneeName = cneeName == null ? null : cneeName.trim();
     }
 
-    public String getoIdList() {
-        return oIdList;
+    public String getCneePhone() {
+        return cneePhone;
     }
 
-    public void setoIdList(String oIdList) {
-        this.oIdList = oIdList;
+    public void setCneePhone(String cneePhone) {
+        this.cneePhone = cneePhone == null ? null : cneePhone.trim();
     }
 
-    public Integer getuId() {
-        return uId;
+    public String getCneeProvince() {
+        return cneeProvince;
     }
 
-    public void setuId(Integer uId) {
-        this.uId = uId;
+    public void setCneeProvince(String cneeProvince) {
+        this.cneeProvince = cneeProvince == null ? null : cneeProvince.trim();
     }
 
-    public String getoSite() {
-        return oSite;
+    public String getCneeCity() {
+        return cneeCity;
     }
 
-    public void setoSite(String oSite) {
-        this.oSite = oSite;
+    public void setCneeCity(String cneeCity) {
+        this.cneeCity = cneeCity == null ? null : cneeCity.trim();
     }
 
-    public String getoRemarks() {
-        return oRemarks;
+    public String getCneeDistrict() {
+        return cneeDistrict;
     }
 
-    public void setoRemarks(String oRemarks) {
-        this.oRemarks = oRemarks;
+    public void setCneeDistrict(String cneeDistrict) {
+        this.cneeDistrict = cneeDistrict == null ? null : cneeDistrict.trim();
     }
 
-    public String getReceived1() {
-        return received1;
+    public String getCneeAddress() {
+        return cneeAddress;
     }
 
-    public void setReceived1(String received1) {
-        this.received1 = received1;
+    public void setCneeAddress(String cneeAddress) {
+        this.cneeAddress = cneeAddress == null ? null : cneeAddress.trim();
     }
 
-    public String getReceived2() {
-        return received2;
+    public BigDecimal getTotalPrices() {
+        return totalPrices;
     }
 
-    public void setReceived2(String received2) {
-        this.received2 = received2;
+    public void setTotalPrices(BigDecimal totalPrices) {
+        this.totalPrices = totalPrices;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public Date getOrderTime() {
+        return orderTime;
+    }
+
+    public void setOrderTime(Date orderTime) {
+        this.orderTime = orderTime;
+    }
+
+    public Date getPayTime() {
+        return payTime;
+    }
+
+    public void setPayTime(Date payTime) {
+        this.payTime = payTime;
+    }
+
+    public String getCreateUser() {
+        return createUser;
+    }
+
+    public void setCreateUser(String createUser) {
+        this.createUser = createUser == null ? null : createUser.trim();
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public String getModifUser() {
+        return modifUser;
+    }
+
+    public void setModifUser(String modifUser) {
+        this.modifUser = modifUser == null ? null : modifUser.trim();
+    }
+
+    public Date getModifTime() {
+        return modifTime;
+    }
+
+    public void setModifTime(Date modifTime) {
+        this.modifTime = modifTime;
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "oid=" + oid +
+                ", uid=" + uid +
+                ", cneeName='" + cneeName + '\'' +
+                ", cneePhone='" + cneePhone + '\'' +
+                ", cneeProvince='" + cneeProvince + '\'' +
+                ", cneeCity='" + cneeCity + '\'' +
+                ", cneeDistrict='" + cneeDistrict + '\'' +
+                ", cneeAddress='" + cneeAddress + '\'' +
+                ", totalPrices=" + totalPrices +
+                ", status=" + status +
+                ", orderTime=" + orderTime +
+                ", payTime=" + payTime +
+                ", createUser='" + createUser + '\'' +
+                ", createTime=" + createTime +
+                ", modifUser='" + modifUser + '\'' +
+                ", modifTime=" + modifTime +
+                '}';
     }
 }
