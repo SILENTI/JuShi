@@ -39,7 +39,7 @@ public class OrderServiceImpl implements OrderService {
     private GoodsService goodsService;
 
     @Override
-    public void createOrder(Integer uid, Integer aid, Integer[] tid, String userName) {
+    public Order createOrder(Integer uid, Integer aid, Integer[] tid, String userName) {
 
         //创建对象
         Order order = new Order();
@@ -66,7 +66,7 @@ public class OrderServiceImpl implements OrderService {
             price = trolley.getPrice().multiply(new BigDecimal(trolley.getNum().toString()));
         }
 
-            System.out.println("商品总价："+price);
+//            System.out.println("商品总价："+price);
 
             //设置商品总价
             order.setTotalPrices(price);
@@ -115,6 +115,7 @@ public class OrderServiceImpl implements OrderService {
                 throw new InsertException("未知错误，插入失败");
             }
         }
+        return order;
     }
 
     /**
