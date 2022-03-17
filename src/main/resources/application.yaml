@@ -2,13 +2,38 @@ spring:
   devtools:
     restart:
       enabled: true
+#数据库配置
   datasource:
     url: jdbc:mysql://localhost:3306/jushi?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: root
 
+#Redis配置
+  redis:
+    #连接地址
+    host: 127.0.0.1
+    #端口号
+    port: 6379
+    #超时时间
+    timeout: 10000ms
+    #数据库
+    database: 0
+    lettuce:
+      pool:
+        #最大连接数，默认8
+        max-active: 1024
+        #最大连接阻塞等待时间，默认-1
+        max-wait: 10000ms
+        #最大空闲连接
+        max-idle: 200
+        #最小空闲连接
+        min-idle: 5
+
+#mybatis配置
 mybatis:
+#Mapper配置文件
   mapper-locations: classpath*:/mappers/*.xml
+#实体类存储位置
   type-aliases-package: com.example.jushi.model
 

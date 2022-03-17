@@ -13,7 +13,7 @@ import java.util.List;
  * Description: 订单相关业务层
  */
 @Service
-public interface OrderService {
+public interface IOrderService {
 
     /**
      * 创建订单信息

@@ -1,8 +1,9 @@
 package com.example.jushi.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Address {
+public class Address implements Serializable {
     private Integer aid;
 
     private Integer uid;

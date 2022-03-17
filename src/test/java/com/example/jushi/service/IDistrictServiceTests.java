@@ -16,17 +16,17 @@ import java.util.List;
  */
 @SpringBootTest
 @RunWith(SpringRunner.class)
-public class DistrictServiceTests {
+public class IDistrictServiceTests {
 
     @Autowired
-    private DistrictService districtService;
+    private IDistrictService IDistrictService;
 
     /**
      * 获取地址
      */
     @Test
     public void findDistrict (){
-        List<District> districtList = districtService.findDistrict("86");
+        List<District> districtList = IDistrictService.findDistrict("86");
         for (District district : districtList) {
             System.out.println(district.toString());
         }
@@ -37,6 +37,6 @@ public class DistrictServiceTests {
      */
     @Test
     public void findDistrictName (){
-        System.out.println(districtService.findDistrictName("431226"));
+        System.out.println(IDistrictService.findDistrictName("431226"));
     }
 }

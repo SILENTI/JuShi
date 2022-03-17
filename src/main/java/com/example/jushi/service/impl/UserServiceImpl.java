@@ -2,10 +2,9 @@ package com.example.jushi.service.impl;
 
 import com.example.jushi.mapper.UserMapper;
 import com.example.jushi.model.User;
-import com.example.jushi.service.UserService;
+import com.example.jushi.service.IUserService;
 import com.example.jushi.service.ex.*;
 import com.example.jushi.util.MD5Util;
-import com.example.jushi.vo.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +16,7 @@ import java.util.Date;
  * @author 居無何
  */
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements IUserService {
 
     @Autowired
     private UserMapper userMapper;

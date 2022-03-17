@@ -11,7 +11,7 @@ import java.util.List;
  * Description: 关于省份地区的信息的service层
  */
 @Service
-public interface DistrictService {
+public interface IDistrictService {
 
     /**
      * 更具parent父ID查询相关信息

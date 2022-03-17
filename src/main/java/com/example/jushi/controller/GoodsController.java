@@ -1,7 +1,7 @@
 package com.example.jushi.controller;
 
 import com.example.jushi.model.Goods;
-import com.example.jushi.service.GoodsService;
+import com.example.jushi.service.IGoodsService;
 import com.example.jushi.util.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +17,7 @@ import java.util.List;
 public class GoodsController {
 
     @Autowired
-    private GoodsService goodsService;
+    private IGoodsService IGoodsService;
 
     /**
      * 热销商品获取
@@ -29,7 +29,7 @@ public class GoodsController {
         System.out.println("获取热销商品列表");
 
         //调用service层方法
-        List<Goods> goodsList = goodsService.goodsDisplay();
+        List<Goods> goodsList = IGoodsService.goodsDisplay();
 
         return new JsonResult<>(goodsList,"热销商品列表获取成功");
     }

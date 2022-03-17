@@ -16,17 +16,17 @@ import java.util.List;
  */
 @SpringBootTest
 @RunWith(SpringRunner.class)
-public class GoodsServiceTests {
+public class IGoodsServiceTests {
 
     @Autowired
-    private GoodsService goodsService;
+    private IGoodsService IGoodsService;
 
     /**
      * 获取热销商品列表
      * */
     @Test
     public void goodsDisplay (){
-         List<Goods> goodsList = goodsService.goodsDisplay();
+         List<Goods> goodsList = IGoodsService.goodsDisplay();
         for (Goods goods : goodsList) {
             System.out.println(goods.toString());
         }
@@ -34,7 +34,7 @@ public class GoodsServiceTests {
 
     @Test
     public void getGoods () {
-        System.out.println(goodsService.selectGoodsByGid(1).toString());
+        System.out.println(IGoodsService.selectGoodsByGid(1).toString());
     }
 
 }

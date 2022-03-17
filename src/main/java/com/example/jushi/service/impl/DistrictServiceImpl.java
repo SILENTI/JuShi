@@ -2,7 +2,7 @@ package com.example.jushi.service.impl;
 
 import com.example.jushi.mapper.DistrictMapper;
 import com.example.jushi.model.District;
-import com.example.jushi.service.DistrictService;
+import com.example.jushi.service.IDistrictService;
 import com.example.jushi.service.ex.DistrictException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +15,7 @@ import java.util.List;
  * Description:
  */
 @Service
-public class DistrictServiceImpl implements DistrictService {
+public class DistrictServiceImpl implements IDistrictService {
 
     @Autowired
     private DistrictMapper districtMapper;

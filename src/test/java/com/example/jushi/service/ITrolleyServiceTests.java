@@ -14,17 +14,17 @@ import org.springframework.test.context.junit4.SpringRunner;
  */
 @SpringBootTest
 @RunWith(SpringRunner.class)
-public class TrolleyServiceTests {
+public class ITrolleyServiceTests {
 
     @Autowired
-    private TrolleyService trolleyService;
+    private ITrolleyService ITrolleyService;
 
     /**
      * 将商品加入购物车中
      * */
     @Test
     public void addGoodsTrolley (){
-        trolleyService.addGoodsTrolley(1,10,15,"南卿%");
+        ITrolleyService.addGoodsTrolley(1,10,15,"南卿%");
     }
 
     /**
@@ -32,7 +32,7 @@ public class TrolleyServiceTests {
      */
     @Test
     public void selectTrolley (){
-        Trolley trolley = trolleyService.selectTrolleyByTid(2,14);
+        Trolley trolley = ITrolleyService.selectTrolleyByTid(2,14);
         System.out.println(trolley.toString());
     }
 

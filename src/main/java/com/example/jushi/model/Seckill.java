@@ -1,9 +1,11 @@
 package com.example.jushi.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class Seckill {
+public class Seckill implements Serializable {
+
     private Long id;
 
     private Long gId;

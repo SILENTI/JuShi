@@ -3,7 +3,7 @@ package com.example.jushi.service.impl;
 import com.example.jushi.mapper.GoodsMapper;
 import com.example.jushi.mapper.TrolleyMapper;
 import com.example.jushi.model.Trolley;
-import com.example.jushi.service.TrolleyService;
+import com.example.jushi.service.ITrolleyService;
 import com.example.jushi.service.ex.IllegalAccessException;
 import com.example.jushi.service.ex.InsertException;
 import com.example.jushi.service.ex.UpdateException;
@@ -21,7 +21,7 @@ import java.util.List;
  * Description:
  */
 @Service
-public class TrolleyServiceImpl implements TrolleyService {
+public class TrolleyServiceImpl implements ITrolleyService {
 
     @Autowired
     private TrolleyMapper trolleyMapper;

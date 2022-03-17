@@ -12,7 +12,7 @@ import java.util.List;
  * Description:
  */
 @Service
-public interface TrolleyService {
+public interface ITrolleyService {
 
     /**
      * 将商品加入购物车

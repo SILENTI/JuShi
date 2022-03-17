@@ -13,17 +13,17 @@ import org.springframework.test.context.junit4.SpringRunner;
  */
 @SpringBootTest
 @RunWith(SpringRunner.class)
-public class OrderServiceTests {
+public class IOrderServiceTests {
 
     @Autowired
-    private OrderService orderService;
+    private IOrderService IOrderService;
 
     /**
      * 新增order订单信息
      */
     @Test
     public void createOrder (){
-        orderService.createOrder(14,7,new Integer[]{8},"居無何");
+        IOrderService.createOrder(14,7,new Integer[]{8},"居無何");
     }
 
 }

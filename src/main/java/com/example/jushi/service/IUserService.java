@@ -11,7 +11,7 @@ import javax.servlet.http.HttpSession;
  * @author 居無何
  */
 @Service
-public interface UserService {
+public interface IUserService {
 
     /**
      * 用户注册添加记录

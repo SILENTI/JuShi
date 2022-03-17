@@ -3,8 +3,7 @@ package com.example.jushi.service.impl;
 
 import com.example.jushi.mapper.GoodsMapper;
 import com.example.jushi.model.Goods;
-import com.example.jushi.model.Trolley;
-import com.example.jushi.service.GoodsService;
+import com.example.jushi.service.IGoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +13,7 @@ import java.util.List;
  * @author 居無何
  * */
 @Service
-public class GoodsServiceImpl implements GoodsService {
+public class GoodsServiceImpl implements IGoodsService {
 
     @Autowired
     private GoodsMapper goodsMapper;

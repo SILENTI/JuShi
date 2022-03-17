@@ -11,7 +11,7 @@ import java.util.List;
  * Description:
  */
 @Service
-public interface AddressService {
+public interface IAddressService {
 
     /**
      * 新建收货地址

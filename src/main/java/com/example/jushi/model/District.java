@@ -1,6 +1,8 @@
 package com.example.jushi.model;
 
-public class District {
+import java.io.Serializable;
+
+public class District implements Serializable {
     private Integer id;
 
     private String parent;

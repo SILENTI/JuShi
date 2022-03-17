@@ -11,7 +11,7 @@ import java.util.List;
  * Description: 商品模块的业务层
  */
 @Service
-public interface GoodsService {
+public interface IGoodsService {
 
     /**
      * 热销商品展示

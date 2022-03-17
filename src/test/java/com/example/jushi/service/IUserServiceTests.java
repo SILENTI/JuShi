@@ -1,7 +1,6 @@
 package com.example.jushi.service;
 
 import com.example.jushi.model.User;
-import com.example.jushi.vo.UserVo;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +19,10 @@ import javax.servlet.http.HttpSession;
  */
 @SpringBootTest
 @RunWith(SpringRunner.class)
-public class UserServiceTests {
+public class IUserServiceTests {
 
     @Autowired
-    private UserService userService;
+    private IUserService IUserService;
 
     /**
      * 用户注册Service-TEST
@@ -33,7 +32,7 @@ public class UserServiceTests {
        User user = new User();
        user.setUsername("鲁路修");
        user.setPassword("5288");
-       userService.insertUser(user);
+       IUserService.insertUser(user);
     }
 
     /**
@@ -44,7 +43,7 @@ public class UserServiceTests {
         User user = new User();
         user.setUsername("鲁路修");
         user.setPassword("5288");
-        User judge = userService.userLogin(user);
+        User judge = IUserService.userLogin(user);
         if (judge != null){
             System.out.println(judge.toString());
             System.out.println("----登录成功---");
@@ -56,7 +55,7 @@ public class UserServiceTests {
      */
     @Test
     public void changePassword () {
-        userService.changePassword(14,"居無何","5288","8888");
+        IUserService.changePassword(14,"居無何","5288","8888");
     }
 
     /**
@@ -75,7 +74,7 @@ public class UserServiceTests {
         user.setEmail("1234567890@qq.com");
         session.setAttribute("user",user);
 
-        User user1 = userService.changeUserInfo(user,session);
+        User user1 = IUserService.changeUserInfo(user,session);
         System.out.println(user1.toString());
     }
 

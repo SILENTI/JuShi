@@ -1,12 +1,13 @@
 package com.example.jushi.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
 /**
  * @author 居無何
  */
-public class Order {
+public class Order implements Serializable {
     private Integer oid;
 
     private Integer uid;

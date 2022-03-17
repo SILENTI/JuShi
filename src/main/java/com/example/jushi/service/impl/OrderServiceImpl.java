@@ -3,10 +3,10 @@ package com.example.jushi.service.impl;
 import com.example.jushi.mapper.OrderItemMapper;
 import com.example.jushi.mapper.OrderMapper;
 import com.example.jushi.model.*;
-import com.example.jushi.service.AddressService;
-import com.example.jushi.service.GoodsService;
-import com.example.jushi.service.OrderService;
-import com.example.jushi.service.TrolleyService;
+import com.example.jushi.service.IAddressService;
+import com.example.jushi.service.IGoodsService;
+import com.example.jushi.service.IOrderService;
+import com.example.jushi.service.ITrolleyService;
 import com.example.jushi.service.ex.InsertException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +21,7 @@ import java.util.List;
  * Description: 订单相关业务层
  */
 @Service
-public class OrderServiceImpl implements OrderService {
+public class OrderServiceImpl implements IOrderService {
 
     @Autowired
     private OrderMapper orderMapper;
@@ -30,13 +30,13 @@ public class OrderServiceImpl implements OrderService {
     private OrderItemMapper orderItemMapper;
 
     @Autowired
-    private AddressService addressService;
+    private IAddressService IAddressService;
 
     @Autowired
-    private TrolleyService trolleyService;
+    private ITrolleyService ITrolleyService;
 
     @Autowired
-    private GoodsService goodsService;
+    private IGoodsService IGoodsService;
 
     @Override
     public Order createOrder(Integer uid, Integer aid, Integer[] tid, String userName) {
@@ -46,7 +46,7 @@ public class OrderServiceImpl implements OrderService {
         OrderItem orderItem = new OrderItem();
 
         //获取到address对象
-        Address address = addressService.selectAddressByAid(aid, uid);
+        Address address = IAddressService.selectAddressByAid(aid, uid);
 
         //补全地址信息
         order.setCneeName(address.getName());
@@ -57,7 +57,7 @@ public class OrderServiceImpl implements OrderService {
         order.setCneeAddress(address.getAddress());
 
         //获取到trolley对象-购物车对象
-        List<Trolley> trolleys = trolleyService.selectTrolleyByTid(tid);
+        List<Trolley> trolleys = ITrolleyService.selectTrolleyByTid(tid);
 
         BigDecimal price = null;
         //获取该商品表总价格
@@ -99,7 +99,7 @@ public class OrderServiceImpl implements OrderService {
         for (Trolley trolley : trolleys) {
 
             //获取good对象
-            Goods goods = goodsService.selectGoodsByGid(trolley.getGid());
+            Goods goods = IGoodsService.selectGoodsByGid(trolley.getGid());
 
             //补全内容
             orderItem.setImage(goods.getgImg());

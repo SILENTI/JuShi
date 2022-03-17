@@ -14,10 +14,10 @@ import org.springframework.test.context.junit4.SpringRunner;
  */
 @SpringBootTest
 @RunWith(SpringRunner.class)
-public class AddressServiceTests {
+public class IAddressServiceTests {
 
     @Autowired
-    private AddressService addressService;
+    private IAddressService IAddressService;
 
     /**
      * 创建address，就是新建收货地址
@@ -27,7 +27,7 @@ public class AddressServiceTests {
         Address address = new Address();
         address.setUid(15);
         address.setName("梁朝伟");
-        addressService.createAddress(15,"梁朝伟",address);
+        IAddressService.createAddress(15,"梁朝伟",address);
     }
 
     /**
@@ -35,7 +35,7 @@ public class AddressServiceTests {
      */
     @Test
     public void changeAddressDefault (){
-        addressService.changeAddressDefault(2,14,"鲁路修");
+        IAddressService.changeAddressDefault(2,14,"鲁路修");
     }
 
     /**
@@ -43,7 +43,7 @@ public class AddressServiceTests {
      * */
     @Test
     public void deleteAddress (){
-        addressService.deleteAddress(1,14,"断舍离");
+        IAddressService.deleteAddress(1,14,"断舍离");
     }
 
     /**
@@ -51,7 +51,7 @@ public class AddressServiceTests {
      */
     @Test
     public void selectAddress(){
-        Address address = addressService.selectAddressByAid(2,14);
+        Address address = IAddressService.selectAddressByAid(2,14);
         System.out.println(address.toString());
     }
 }

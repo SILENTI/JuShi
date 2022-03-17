@@ -2,7 +2,7 @@ package com.example.jushi.service.impl;
 
 import com.example.jushi.mapper.AddressMapper;
 import com.example.jushi.model.Address;
-import com.example.jushi.service.AddressService;
+import com.example.jushi.service.IAddressService;
 import com.example.jushi.service.ex.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +16,7 @@ import java.util.List;
  * Description:
  */
 @Service
-public class AddressServiceImpl implements AddressService {
+public class AddressServiceImpl implements IAddressService {
 
     private  Integer Address_Max = 20;
 

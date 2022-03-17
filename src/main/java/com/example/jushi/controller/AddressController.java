@@ -3,7 +3,7 @@ package com.example.jushi.controller;
 
 import com.example.jushi.model.Address;
 import com.example.jushi.model.User;
-import com.example.jushi.service.AddressService;
+import com.example.jushi.service.IAddressService;
 import com.example.jushi.util.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +22,7 @@ import java.util.List;
 public class AddressController  {
 
     @Autowired
-    private AddressService addressService;
+    private IAddressService IAddressService;
 
     /**
      * 新建用户收货地址
@@ -37,10 +37,10 @@ public class AddressController  {
         User user = (User) session.getAttribute("user");
 
         //先将传递的信息传递个service层
-        addressService.createAddress(user.getUid(),user.getUsername(),address);
+        IAddressService.createAddress(user.getUid(),user.getUsername(),address);
 
         //若以上正常，未抛出异常，则进行查询
-        List<Address> addresses = addressService.findAllAddress(user.getUid());
+        List<Address> addresses = IAddressService.findAllAddress(user.getUid());
 
         return new JsonResult<List<Address>>(addresses,"收货地址新建成功");
     }
@@ -58,7 +58,7 @@ public class AddressController  {
         Integer uid = user.getUid();
 
         //获取address列表
-        List<Address> addresses = addressService.findAllAddress(uid);
+        List<Address> addresses = IAddressService.findAllAddress(uid);
 
        return new JsonResult<List<Address>>(addresses,"当前用户收货地址获取成功");
     }
@@ -76,7 +76,7 @@ public class AddressController  {
         User user = (User) session.getAttribute("user");
 
         //传递数据
-        addressService.changeAddressDefault(aid,user.getUid(), user.getUsername());
+        IAddressService.changeAddressDefault(aid,user.getUid(), user.getUsername());
 
         return new JsonResult<>("默认地址修改成功");
     }
@@ -94,7 +94,7 @@ public class AddressController  {
         User user = (User) session.getAttribute("user");
 
         //调用addressService 方法
-        addressService.deleteAddress(aid,user.getUid(),user.getUsername());
+        IAddressService.deleteAddress(aid,user.getUid(),user.getUsername());
 
         return new JsonResult<>("收货删除成功");
     }

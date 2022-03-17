@@ -1,5 +1,6 @@
 package com.example.jushi.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -7,7 +8,7 @@ import java.util.Date;
  * date: 2022/2/20
  * Description:用户表实体类
  */
-public class User {
+public class User implements Serializable {
 
     private Integer uid;
 

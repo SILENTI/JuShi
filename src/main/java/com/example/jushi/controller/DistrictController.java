@@ -1,7 +1,7 @@
 package com.example.jushi.controller;
 
 import com.example.jushi.model.District;
-import com.example.jushi.service.DistrictService;
+import com.example.jushi.service.IDistrictService;
 import com.example.jushi.util.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +19,7 @@ import java.util.List;
 public class DistrictController {
 
     @Autowired
-    private DistrictService districtService;
+    private IDistrictService IDistrictService;
 
     /**
      * 根据parent查询地区信息
@@ -29,7 +29,7 @@ public class DistrictController {
     @RequestMapping("")
     public JsonResult<List<District>> findDistrict (String parent){
 
-        List<District> districts = districtService.findDistrict(parent);
+        List<District> districts = IDistrictService.findDistrict(parent);
 
         return new JsonResult<>(districts,"地区查询成功");
     }
