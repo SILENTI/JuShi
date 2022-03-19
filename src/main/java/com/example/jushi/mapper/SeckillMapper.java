@@ -1,28 +1,48 @@
 package com.example.jushi.mapper;
 
 import com.example.jushi.model.Seckill;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.example.jushi.vo.SeckillGoodsVo;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
 /**
+ * <p>
+ *  Mapper 接口
+ * </p>
+ *
  * @author 居無何
+ * @since 2022/03/19
  */
 @Mapper
-public interface SeckillMapper {
+public interface SeckillMapper extends BaseMapper<Seckill> {
 
     /**
-     * 更具gId，查询到秒杀商品的信息
-     * @param gId Integer
-     * @return Seckill 秒杀商品的详细信息
-     * */
-    Seckill selectByPrimaryKey(Integer gId);
+     * 根据sid获取秒杀信息
+     * @param sid
+     * @return
+     */
+    Seckill selectSeckillBySid (Integer sid);
 
-//    int deleteByPrimaryKey(Long id);
-//
-//    int insert(Seckill record);
-//
-//    List<Seckill> selectAll();
-//
-//    int updateByPrimaryKey(Seckill record);
+    /**
+     * 获取所有的Seckill信息
+     * @return
+     */
+    List<Seckill> selectAllSeckill ();
+
+    /**
+     * 展示秒杀商品
+     * @return
+     */
+    List<SeckillGoodsVo> selectAllSeckillGoodsVo ();
+
+    /**
+     * 根据分页，获取秒杀列表，
+     * @param start
+     * @param end
+     * @return
+     */
+    List<Seckill> selectSeckillPage (Integer start, Integer end);
+
 }

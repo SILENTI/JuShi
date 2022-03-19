@@ -22,14 +22,40 @@ public class OrderController {
     @Autowired
     private IOrderService IOrderService;
 
-    @RequestMapping("/create_order")
-    public JsonResult<Order> createOrder (Integer aid, Integer [] tid, HttpSession session){
+    /**
+     * 中购物车中的商品选中，创建订单
+     * @param aid
+     * @param tid
+     * @param session
+     * @return
+     */
+    @RequestMapping("/create_order_trolley")
+    public JsonResult<Order> createOrderByTrolley (Integer aid, Integer [] tid, HttpSession session){
 
         User user = (User) session.getAttribute("user");
 
-        Order order = IOrderService.createOrder(user.getUid(),aid,tid,user.getUsername());
+        Order order = IOrderService.createOrderByTrolley(user.getUid(),aid,tid,user.getUsername());
 
         return new JsonResult<Order>(order,"数据新增成功") ;
     }
+
+    /**
+     * 直接商品下单
+     * @param aid
+     * @param gid
+     * @param session
+     * @return
+     */
+    @RequestMapping("/create_order_goods")
+    public JsonResult<Order> createOrderByGoods (Integer aid, Integer gid, Integer num, HttpSession session){
+
+        User user = (User) session.getAttribute("user");
+
+        Order order = IOrderService.createOrderByGoods(user.getUid(),aid,gid,num,user.getUsername());
+
+        return new JsonResult<>(order,"数据新增成功");
+    }
+
+
 
 }

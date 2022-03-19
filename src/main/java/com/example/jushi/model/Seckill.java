@@ -1,88 +1,97 @@
 package com.example.jushi.model;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDateTime;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
+/**
+ * <p>
+ * 
+ * </p>
+ *
+ * @author 居無何
+ * @since 2022/03/19
+ */
+@ApiModel(value = "Seckill对象", description = "")
 public class Seckill implements Serializable {
 
-    private Long id;
+    private static final long serialVersionUID = 1L;
 
-    private Long gId;
+    @ApiModelProperty("秒杀ID")
+    @TableId(value = "sid", type = IdType.AUTO)
+    private Integer sid;
 
-    private Date sStart;
+    @ApiModelProperty("商品ID")
+    private Integer gid;
 
-    private Date sEnd;
+    @ApiModelProperty("开始时间")
+    private LocalDateTime startTime;
 
-    private BigDecimal sPrice;
+    @ApiModelProperty("结束时间")
+    private LocalDateTime endTime;
 
-    private Integer sCount;
+    @ApiModelProperty("秒杀价格")
+    private BigDecimal price;
 
-    private String reserved1;
+    @ApiModelProperty("商品库存")
+    private Integer count;
 
-    private String reserved2;
-
-    public Long getId() {
-        return id;
+    public Integer getSid() {
+        return sid;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setSid(Integer sid) {
+        this.sid = sid;
+    }
+    public Integer getGid() {
+        return gid;
     }
 
-    public Long getgId() {
-        return gId;
+    public void setGid(Integer gid) {
+        this.gid = gid;
+    }
+    public LocalDateTime getStartTime() {
+        return startTime;
     }
 
-    public void setgId(Long gId) {
-        this.gId = gId;
+    public void setStartTime(LocalDateTime startTime) {
+        this.startTime = startTime;
+    }
+    public LocalDateTime getEndTime() {
+        return endTime;
     }
 
-    public Date getsStart() {
-        return sStart;
+    public void setEndTime(LocalDateTime endTime) {
+        this.endTime = endTime;
+    }
+    public BigDecimal getPrice() {
+        return price;
     }
 
-    public void setsStart(Date sStart) {
-        this.sStart = sStart;
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+    public Integer getCount() {
+        return count;
     }
 
-    public Date getsEnd() {
-        return sEnd;
+    public void setCount(Integer count) {
+        this.count = count;
     }
 
-    public void setsEnd(Date sEnd) {
-        this.sEnd = sEnd;
-    }
-
-    public BigDecimal getsPrice() {
-        return sPrice;
-    }
-
-    public void setsPrice(BigDecimal sPrice) {
-        this.sPrice = sPrice;
-    }
-
-    public Integer getsCount() {
-        return sCount;
-    }
-
-    public void setsCount(Integer sCount) {
-        this.sCount = sCount;
-    }
-
-    public String getReserved1() {
-        return reserved1;
-    }
-
-    public void setReserved1(String reserved1) {
-        this.reserved1 = reserved1;
-    }
-
-    public String getReserved2() {
-        return reserved2;
-    }
-
-    public void setReserved2(String reserved2) {
-        this.reserved2 = reserved2;
+    @Override
+    public String toString() {
+        return "Seckill{" +
+            "sid=" + sid +
+            ", gid=" + gid +
+            ", startTime=" + startTime +
+            ", endTime=" + endTime +
+            ", price=" + price +
+            ", count=" + count +
+        "}";
     }
 }

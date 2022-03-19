@@ -3,7 +3,11 @@ package com.example.jushi.model;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * @author 居無何
+ */
 public class Address implements Serializable {
+
     private Integer aid;
 
     private Integer uid;

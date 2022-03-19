@@ -31,6 +31,7 @@ public class MyMvcConfig implements WebMvcConfigurer {
         registry.addViewController("/jushi/user/login_register").setViewName("login_register");
     }
 
+
     /**
      * 拦截器说明：
      *

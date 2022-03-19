@@ -23,7 +23,29 @@ public interface IOrderService {
      * @param userName
      * @return
      */
-    Order createOrder (Integer uid, Integer aid, Integer [] tid, String userName);
+    Order createOrderByTrolley (Integer uid, Integer aid, Integer [] tid, String userName);
+
+    /**
+     * 根据商品直接下单
+     * @param uid
+     * @param aid
+     * @param gid
+     * @param num 下单商品数量
+     * @param username
+     * @return
+     */
+    Order createOrderByGoods (Integer uid, Integer aid, Integer gid, Integer num, String username);
+
+    /**
+     * 秒杀商品下单
+     * @param uid
+     * @param aid
+     * @param sid
+     * @param num
+     * @param userName
+     * @return
+     */
+    Order creatOrderBySeckill (Integer uid, Integer aid, Integer sid, Integer num, String userName);
 
     /**
      * 新增orderItem数据

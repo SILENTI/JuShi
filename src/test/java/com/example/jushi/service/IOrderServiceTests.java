@@ -1,5 +1,6 @@
 package com.example.jushi.service;
 
+import com.example.jushi.model.Order;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +20,27 @@ public class IOrderServiceTests {
     private IOrderService IOrderService;
 
     /**
-     * 新增order订单信息
+     * 购物车新增order订单信息
      */
     @Test
-    public void createOrder (){
-        IOrderService.createOrder(14,7,new Integer[]{8},"居無何");
+    public void createOrderByTrolley (){
+        IOrderService.createOrderByTrolley(14,7,new Integer[]{8},"居無何");
     }
+
+    /**
+     * 商品直选下单
+     */
+    @Test
+    public void createOrderByGoods (){
+        Order order = IOrderService.createOrderByGoods(14,7,1,2,"居無何");
+        System.out.println(order.toString());
+    }
+
+    @Test
+    public void createOrderBySeckill (){
+        Order order = IOrderService.creatOrderBySeckill(14,7,1,1,"居無何");
+        System.out.println(order.toString());
+    }
+
 
 }

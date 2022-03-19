@@ -8,6 +8,7 @@ import java.util.Date;
  * @author 居無何
  */
 public class Goods implements Serializable {
+
     private Integer id;
 
     private Integer gId;

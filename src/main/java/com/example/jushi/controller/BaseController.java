@@ -64,7 +64,13 @@ public class BaseController {
         }else if (e instanceof DistrictException){
             jsonDesign.setStatus(6025);
             jsonDesign.setDescription("遇到未知错误，地区信息查询失败");
-        }else  if (e instanceof InsertException){
+        }else if (e instanceof SeckillGoodsSellOutException){
+            jsonDesign.setStatus(6050);
+            jsonDesign.setDescription("商品已销售完");
+        } else if (e instanceof SeckillGoodsOverTimeException){
+            jsonDesign.setStatus(6060);
+            jsonDesign.setDescription("不在秒杀时间范围内");
+        } else if (e instanceof InsertException){
             jsonDesign.setStatus(7000);
             jsonDesign.setDescription("数据新增出现未知错误");
         } else if (e instanceof FileUploadException){

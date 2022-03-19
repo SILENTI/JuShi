@@ -37,3 +37,6 @@ mybatis:
 #实体类存储位置
   type-aliases-package: com.example.jushi.model
 
+mybatis-plus:
+  mapper-locations: classpath*:/mappers/*.xml
+  type-aliases-package: com.example.jushi.model

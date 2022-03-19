@@ -91,7 +91,7 @@ public class AddressMapperTests {
      */
     @Test
     public void selectAddressByAid (){
-        Address address = addressMapper.selectAddressByAid(2);
+        Address address = addressMapper.selectAddressByAid(7);
         System.out.println(address.toString());
     }
 
