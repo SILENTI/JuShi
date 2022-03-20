@@ -47,6 +47,7 @@
         <result column="g_state" jdbcType="INTEGER" property="gState" />
     </resultMap>
 
+    <!--获取秒杀商品展示信息-->
     <select id="selectAllSeckillGoodsVo" resultMap="BaseSeckillVoResultMap">
         SELECT
             seckill.sid,
@@ -68,5 +69,10 @@
         WHERE
             seckill.gid = goods.g_id
     </select>
+
+    <!--修改商品库存-->
+    <update id="updateSeckillNumBySid" >
+        update seckill set `count` = #{count,jdbcType=INTEGER} where sid = #{sid,jdbcType=INTEGER}
+    </update>
 
 </mapper>

@@ -48,4 +48,12 @@ public class GoodsMapperTests {
         System.out.println(goodsMapper.selectGoodsByGid(1).toString());
     }
 
+    /**
+     * 根据gid，改变商品库存
+     */
+    @Test
+    public void updateGoodsNumByGid (){
+        goodsMapper.updateGoodsNumByGid(4,10);
+    }
+
 }

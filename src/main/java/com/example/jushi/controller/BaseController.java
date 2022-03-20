@@ -91,6 +91,9 @@ public class BaseController {
         } else if (e instanceof  AddressAccessViolationException){
             jsonDesign.setStatus(7060);
             jsonDesign.setDescription("非法访问");
+        } else if (e instanceof GoodsSoldOutException){
+            jsonDesign.setStatus(7070);
+            jsonDesign.setDescription("商品售尽");
         }
         return jsonDesign;
     }

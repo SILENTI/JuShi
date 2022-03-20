@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.jushi.mapper.GoodsMapper">
+
   <resultMap id="BaseResultMap" type="com.example.jushi.model.Goods">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="g_id" jdbcType="INTEGER" property="gId" />
@@ -17,39 +18,6 @@
     <result column="modif_user" jdbcType="VARCHAR" property="modifUser" />
     <result column="modif_time" jdbcType="TIMESTAMP" property="modifTime" />
   </resultMap>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from goods
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.example.jushi.model.Goods">
-    insert into goods (id, g_id, g_name, 
-      g_type, g_price, g_img, 
-      g_stock, g_sales, g_describe, 
-      g_state, create_user, create_time, 
-      modif_user, modif_time)
-    values (#{id,jdbcType=INTEGER}, #{gId,jdbcType=INTEGER}, #{gName,jdbcType=VARCHAR}, 
-      #{gType,jdbcType=VARCHAR}, #{gPrice,jdbcType=DECIMAL}, #{gImg,jdbcType=VARCHAR}, 
-      #{gStock,jdbcType=INTEGER}, #{gSales,jdbcType=INTEGER}, #{gDescribe,jdbcType=VARCHAR}, 
-      #{gState,jdbcType=INTEGER}, #{createUser,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{modifUser,jdbcType=VARCHAR}, #{modifTime,jdbcType=TIMESTAMP})
-  </insert>
-  <update id="updateByPrimaryKey" parameterType="com.example.jushi.model.Goods">
-    update goods
-    set g_id = #{gId,jdbcType=INTEGER},
-      g_name = #{gName,jdbcType=VARCHAR},
-      g_type = #{gType,jdbcType=VARCHAR},
-      g_price = #{gPrice,jdbcType=DECIMAL},
-      g_img = #{gImg,jdbcType=VARCHAR},
-      g_stock = #{gStock,jdbcType=INTEGER},
-      g_sales = #{gSales,jdbcType=INTEGER},
-      g_describe = #{gDescribe,jdbcType=VARCHAR},
-      g_state = #{gState,jdbcType=INTEGER},
-      create_user = #{createUser,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      modif_user = #{modifUser,jdbcType=VARCHAR},
-      modif_time = #{modifTime,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
 
   <!--获取Goods根据gid-->
   <select id="selectGoodsByGid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -70,5 +38,10 @@
   <select id="selectPriceByGid" resultType="java.math.BigDecimal">
     select g_price from goods where g_id = #{gid,jdbcType=INTEGER}
   </select>
+
+  <!--改变该商品库存信息，根据gid-->
+  <update id="updateGoodsNumByGid" >
+    update goods set g_stock = #{newNum,jdbcType=INTEGER} where g_id = #{gid,jdbcType=INTEGER}
+  </update>
 
 </mapper>

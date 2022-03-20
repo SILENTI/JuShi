@@ -12,11 +12,6 @@ import java.util.List;
 @Mapper
 public interface GoodsMapper {
 
-
-    int deleteByPrimaryKey(Integer id);
-
-    int insert(Goods record);
-
     /**
      * 获取goods
      * @param id
@@ -37,5 +32,11 @@ public interface GoodsMapper {
      */
     BigDecimal selectPriceByGid (Integer gid);
 
-    int updateByPrimaryKey(Goods record);
+    /**
+     * 根据商品Id，改变商品库存
+     * @param gid
+     * @param newNum
+     * @return
+     */
+    Integer updateGoodsNumByGid (Integer gid, Integer newNum);
 }

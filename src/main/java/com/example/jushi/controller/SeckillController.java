@@ -1,7 +1,6 @@
 package com.example.jushi.controller;
 
 
-import com.example.jushi.model.Goods;
 import com.example.jushi.model.Order;
 import com.example.jushi.model.User;
 import com.example.jushi.service.IOrderService;
@@ -29,10 +28,11 @@ import java.util.List;
 public class SeckillController {
 
     @Autowired
-    private ISeckillService seckillService;
+    private ISeckillService ISeckillService;
+
 
     @Autowired
-    private IOrderService orderService;
+    private IOrderService IOrderService;
 
     /**
      * 秒杀商品的展示
@@ -41,7 +41,7 @@ public class SeckillController {
     @RequestMapping("/show_seckill")
     public JsonResult<List<SeckillGoodsVo>> showSeckillGoods (){
 
-        List<SeckillGoodsVo> seckillGoodsVos = seckillService.showSeckill();
+        List<SeckillGoodsVo> seckillGoodsVos = ISeckillService.showSeckill();
 
         return new JsonResult<>(seckillGoodsVos,"数据获取成功");
     }
@@ -54,14 +54,17 @@ public class SeckillController {
      * @param session
      * @return
      */
+    @RequestMapping("/create_seckill_order")
     public JsonResult<Order> createOrderBySeckill (Integer aid, Integer sid, Integer num, HttpSession session){
 
+        //获取user对象
         User user = (User) session.getAttribute("user");
-        //检验秒杀条件是否符合
 
+        //检验秒杀条件是否符合
+        ISeckillService.seckillJudge(user.getUid(),aid,sid,num, user.getUsername());
 
         //进行商品下单
-        Order order = orderService.creatOrderBySeckill(user.getUid(), aid, sid, num, user.getUsername());
+        Order order = IOrderService.creatOrderBySeckill(user.getUid(), aid, sid, num, user.getUsername());
 
         return new JsonResult<>(order,"下单成功");
     }

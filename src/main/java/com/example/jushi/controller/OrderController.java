@@ -5,6 +5,7 @@ import com.example.jushi.model.User;
 import com.example.jushi.service.IOrderService;
 import com.example.jushi.util.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,7 +20,8 @@ import javax.servlet.http.HttpSession;
 @RequestMapping("/jushi/order")
 public class OrderController {
 
-    @Autowired
+//   @Qualifier("OrderServiceImpl")//引用mybatis-plus后，其只带多个实现类，指明自己实现类
+   @Autowired
     private IOrderService IOrderService;
 
     /**

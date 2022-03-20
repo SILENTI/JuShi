@@ -17,7 +17,7 @@ import io.swagger.annotations.ApiModelProperty;
  * @since 2022/03/19
  */
 @ApiModel(value = "Seckill对象", description = "")
-public class Seckill implements Serializable {
+public class Seckill extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

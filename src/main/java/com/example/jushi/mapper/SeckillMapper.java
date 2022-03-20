@@ -45,4 +45,12 @@ public interface SeckillMapper extends BaseMapper<Seckill> {
      */
     List<Seckill> selectSeckillPage (Integer start, Integer end);
 
+    /**
+     * 下单成功后更改商品库存信息
+     * @param sid
+     * @param count
+     * @return
+     */
+    Integer updateSeckillNumBySid (Integer sid, Integer count);
+
 }

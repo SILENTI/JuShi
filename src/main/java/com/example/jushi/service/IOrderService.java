@@ -16,7 +16,7 @@ import java.util.List;
 public interface IOrderService {
 
     /**
-     * 创建订单信息
+     * 创建订单信息-就是从购物车多选下单
      * @param uid
      * @param aid
      * @param tid
@@ -48,8 +48,25 @@ public interface IOrderService {
     Order creatOrderBySeckill (Integer uid, Integer aid, Integer sid, Integer num, String userName);
 
     /**
+     * 修改商品库存
+     * @param gid
+     * @param count
+     * @return
+     */
+    void modifyGoodsCount (Integer gid, Integer count);
+
+    /**
+     * 修改秒杀商品库存
+     * @param sid
+     * @param count
+     */
+    void modifySeckillCount (Integer sid, Integer count);
+
+    /**
      * 新增orderItem数据
      * @param orderItem
      */
     void createOrderItem (OrderItem orderItem);
+
+
 }

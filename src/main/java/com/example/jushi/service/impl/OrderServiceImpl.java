@@ -1,5 +1,6 @@
 package com.example.jushi.service.impl;
 
+import com.example.jushi.mapper.GoodsMapper;
 import com.example.jushi.mapper.OrderItemMapper;
 import com.example.jushi.mapper.OrderMapper;
 import com.example.jushi.mapper.SeckillMapper;
@@ -8,7 +9,10 @@ import com.example.jushi.service.IAddressService;
 import com.example.jushi.service.IGoodsService;
 import com.example.jushi.service.IOrderService;
 import com.example.jushi.service.ITrolleyService;
+import com.example.jushi.service.ex.GoodsSoldOutException;
 import com.example.jushi.service.ex.InsertException;
+import com.example.jushi.service.ex.SeckillGoodsSellOutException;
+import com.example.jushi.service.ex.UpdateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +36,9 @@ public class OrderServiceImpl implements IOrderService {
 
     @Autowired
     private SeckillMapper seckillMapper;
+
+    @Autowired
+    private GoodsMapper goodsMapper;
 
     @Autowired
     private IAddressService IAddressService;
@@ -113,6 +120,14 @@ public class OrderServiceImpl implements IOrderService {
             //新增数据orderItem
             Integer sign = orderItemMapper.insertOrderItem(orderItem);
 
+            //判断库存和购入量是否足够
+            if ( (goods.getgStock() - trolley.getNum()) <0 ){
+                throw new GoodsSoldOutException("商品售尽");
+            }
+
+            //修改商品库存
+            modifyGoodsCount(goods.getgId(), goods.getgStock() - trolley.getNum() );
+
             if (sign == null || sign != 1){
                 throw new InsertException("未知错误，插入失败");
             }
@@ -161,6 +176,15 @@ public class OrderServiceImpl implements IOrderService {
         if (record == null || record !=1){
             throw new InsertException("位置情况数据新增失败");
         }
+
+        //库存修改
+        //判断库存和购入量是否足够
+        if ( (goods.getgStock() - num) <0 ){
+            throw new GoodsSoldOutException("商品售尽");
+        }
+
+        //修改商品库存
+        modifyGoodsCount(goods.getgId(), goods.getgStock() - num );
 
         //补全item信息 订单ID、
         orderItem.setOid(order.getOid());
@@ -233,6 +257,15 @@ public class OrderServiceImpl implements IOrderService {
             throw new InsertException("位置情况数据新增失败");
         }
 
+        //库存修改
+        //判断库存和购入量是否足够
+        if ( (goods.getgStock() - num) <0 ){
+            throw new SeckillGoodsSellOutException("秒杀商品售尽");
+        }
+
+        //修改商品库存
+        modifySeckillCount(goods.getgId(), goods.getgStock() - num );
+
         //补全item信息 订单ID、
         orderItem.setOid(order.getOid());
 
@@ -260,7 +293,33 @@ public class OrderServiceImpl implements IOrderService {
         return order;
     }
 
+    /**
+     * 修改商品表商品库存
+     * @param gid
+     * @param count
+     * @return
+     */
+    @Override
+    public void modifyGoodsCount(Integer gid, Integer count) {
 
+        Integer record = goodsMapper.updateGoodsNumByGid(gid, count);
+
+        //若遇到未知问题，修改失败
+        if (record == null || record!= 1){
+            throw new UpdateException("数据修改失败");
+        }
+    }
+
+    @Override
+    public void modifySeckillCount(Integer sid, Integer count) {
+
+        Integer record =  seckillMapper.updateSeckillNumBySid(sid, count);
+
+        //若遇到未知问题，修改失败
+        if (record == null || record!= 1){
+            throw new UpdateException("数据修改失败");
+        }
+    }
 
     /**
      * 创建OrderItem
@@ -268,9 +327,6 @@ public class OrderServiceImpl implements IOrderService {
      */
     @Override
     public void createOrderItem(OrderItem orderItem) {
-
-
-
-            orderItemMapper.insertOrderItem(orderItem);
+        orderItemMapper.insertOrderItem(orderItem);
     }
 }

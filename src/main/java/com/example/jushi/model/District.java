@@ -2,7 +2,11 @@ package com.example.jushi.model;
 
 import java.io.Serializable;
 
+/**
+ * @author 居無何
+ */
 public class District implements Serializable {
+
     private Integer id;
 
     private String parent;
