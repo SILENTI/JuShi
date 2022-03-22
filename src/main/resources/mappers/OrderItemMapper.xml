@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.jushi.mapper.OrderItemMapper">
+
   <resultMap id="BaseResultMap" type="com.example.jushi.model.OrderItem">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="oid" jdbcType="INTEGER" property="oid" />
@@ -14,10 +15,6 @@
     <result column="modif_user" jdbcType="VARCHAR" property="modifUser" />
     <result column="modif_time" jdbcType="TIMESTAMP" property="modifTime" />
   </resultMap>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from order_item
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
 
   <!--新增OrderItem数据-->
   <insert id="insertOrderItem" parameterType="com.example.jushi.model.OrderItem">
@@ -31,29 +28,32 @@
       #{modifUser,jdbcType=VARCHAR}, #{modifTime,jdbcType=TIMESTAMP})
   </insert>
 
-  <update id="updateByPrimaryKey" parameterType="com.example.jushi.model.OrderItem">
-    update order_item
-    set oid = #{oid,jdbcType=INTEGER},
-      gid = #{gid,jdbcType=INTEGER},
-      title = #{title,jdbcType=VARCHAR},
-      image = #{image,jdbcType=VARCHAR},
-      price = #{price,jdbcType=DECIMAL},
-      num = #{num,jdbcType=INTEGER},
-      create_user = #{createUser,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      modif_user = #{modifUser,jdbcType=VARCHAR},
-      modif_time = #{modifTime,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select id, oid, gid, title, image, price, num, create_user, create_time, modif_user,
-    modif_time
-    from order_item
-    where id = #{id,jdbcType=INTEGER}
+  <!--根据uid和gid查询到-SeckillItem信息-->
+  <select id="selectSeckillByUIdAndGid" resultMap="BaseResultMap" >
+    SELECT
+      order_item.gid,
+      order_item.oid,
+      order_item.num,
+      order_item.price,
+      order_item.image,
+      order_item.title,
+      order_item.create_user,
+      order_item.create_time,
+      order_item.modif_user,
+      order_item.modif_time
+    FROM
+      `order`
+        RIGHT JOIN
+      order_item
+      ON
+        `order`.oid = order_item.oid
+    WHERE
+      order_item.gid = #{gid,jdbcType=INTEGER} AND
+      `order`.uid = #{uid,jdbcType=INTEGER}
+    ORDER BY
+      order_item.create_time DESC
+      LIMIT 1
   </select>
-  <select id="selectAll" resultMap="BaseResultMap">
-    select id, oid, gid, title, image, price, num, create_user, create_time, modif_user,
-    modif_time
-    from order_item
-  </select>
+
+
 </mapper>

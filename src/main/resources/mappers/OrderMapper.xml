@@ -21,13 +21,7 @@
     <result column="modif_time" jdbcType="TIMESTAMP" property="modifTime" />
   </resultMap>
 
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from `order`
-    where oid = #{oid,jdbcType=INTEGER}
-  </delete>
-
   <!--数据新增，返回主键id-->
-
   <insert id="insertOrder" parameterType="com.example.jushi.model.Order" useGeneratedKeys="true" keyProperty="oid">
 <!--
     <selectKey keyProperty="oid" order="AFTER" resultType="java.lang.Integer">
@@ -50,26 +44,7 @@
       #{modifUser,jdbcType=VARCHAR}, #{modifTime,jdbcType=TIMESTAMP})
   </insert>
 
-  <update id="updateByPrimaryKey" parameterType="com.example.jushi.model.Order">
-    update `order`
-    set uid = #{uid,jdbcType=INTEGER},
-      cnee_name = #{cneeName,jdbcType=VARCHAR},
-      cnee_phone = #{cneePhone,jdbcType=VARCHAR},
-      cnee_province = #{cneeProvince,jdbcType=VARCHAR},
-      cnee_city = #{cneeCity,jdbcType=VARCHAR},
-      cnee_district = #{cneeDistrict,jdbcType=VARCHAR},
-      cnee_address = #{cneeAddress,jdbcType=VARCHAR},
-      total_prices = #{totalPrices,jdbcType=DECIMAL},
-      status = #{status,jdbcType=INTEGER},
-      order_time = #{orderTime,jdbcType=TIMESTAMP},
-      pay_time = #{payTime,jdbcType=TIMESTAMP},
-      create_user = #{createUser,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      modif_user = #{modifUser,jdbcType=VARCHAR},
-      modif_time = #{modifTime,jdbcType=TIMESTAMP}
-    where oid = #{oid,jdbcType=INTEGER}
-  </update>
-
+  <!--根据aid查询order对象-->
   <select id="selectOrderByAid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select oid,uid,cnee_name,cnee_phone,cnee_province,cnee_city,cnee_district,
     cnee_address,total_prices,status,order_time,pay_time,create_user,create_time,
@@ -78,10 +53,9 @@
     where oid = #{oid,jdbcType=INTEGER}
   </select>
 
-  <select id="selectAll" resultMap="BaseResultMap">
-    select oid, uid, cnee_name, cnee_phone, cnee_province, cnee_city, cnee_district,
-    cnee_address, total_prices, status, order_time, pay_time, create_user, create_time,
-    modif_user, modif_time
-    from `order`
+  <!--根据uid和aid查询order对象-->
+  <select id="selectOrderByUidAndGid">
+
   </select>
+
 </mapper>

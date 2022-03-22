@@ -25,9 +25,13 @@ public interface OrderMapper {
      */
     Order selectOrderByAid(Integer oid);
 
-    int deleteByPrimaryKey(Integer oid);
 
-    List<Order> selectAll();
+    /**
+     * 根据uid和gid查询到order对象
+     * @param uid
+     * @param gid
+     * @return
+     */
+    Order selectOrderByUidAndGid (Integer uid, Integer gid);
 
-    int updateByPrimaryKey(Order record);
 }
