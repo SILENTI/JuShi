@@ -3,10 +3,7 @@ package com.example.jushi.service.impl;
 import com.example.jushi.mapper.GoodsMapper;
 import com.example.jushi.mapper.OrderItemMapper;
 import com.example.jushi.mapper.OrderMapper;
-import com.example.jushi.model.Goods;
-import com.example.jushi.model.Order;
-import com.example.jushi.model.OrderItem;
-import com.example.jushi.model.Seckill;
+import com.example.jushi.model.*;
 import com.example.jushi.mapper.SeckillMapper;
 import com.example.jushi.service.IGoodsService;
 import com.example.jushi.service.ISeckillService;
@@ -14,14 +11,19 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.jushi.service.ex.SeckillGoodsExcessPurchaseQuantityException;
 import com.example.jushi.service.ex.SeckillGoodsOverTimeException;
 import com.example.jushi.service.ex.SeckillGoodsSellOutException;
+import com.example.jushi.service.ex.UserLoginInfoExpiredException;
+import com.example.jushi.util.MD5Util;
 import com.example.jushi.vo.SeckillGoodsVo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+import sun.security.provider.MD5;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * <p>
@@ -42,6 +44,9 @@ public class SeckillServiceImpl extends ServiceImpl<SeckillMapper, Seckill> impl
 
     @Autowired
     private OrderItemMapper orderItemMapper;
+
+    @Autowired
+    private RedisTemplate redisTemplate;
 
     /**
      * 秒杀商品展示
@@ -109,5 +114,53 @@ public class SeckillServiceImpl extends ServiceImpl<SeckillMapper, Seckill> impl
         }
     }
 
+    /**
+     * 创建秒杀接口
+     * @param user
+     * @param sid
+     * @return
+     */
+    @Override
+    public String getSeckillPath(User user, Integer sid) {
 
+        //进行判断相关信息
+        if (user == null){
+            throw new UserLoginInfoExpiredException("用户登录信息过期");
+        }
+        if (sid <0 || sid.equals("")){
+            log.error("传输的sid不符合条件......");
+        }
+
+        String salt = "seckillSalt:"+user.getUid()+":"+sid;
+
+        //创建秒杀接口路径
+        String seckillPath = MD5Util.MD5(UUID.randomUUID().toString(),salt);
+
+        //将创建的接口路径存储到Redis中
+        redisTemplate.opsForValue().set(salt,seckillPath);
+
+        return seckillPath;
+    }
+
+    /**
+     * 判断秒杀接口是否符合条件
+     * @param user
+     * @param sid
+     * @param seckillPath
+     * @return
+     */
+    @Override
+    public boolean judgeSeckillPath(User user, Integer sid, String seckillPath) {
+
+        String key = "seckillSalt:"+user.getUid()+":"+sid;
+
+        String reallyPath = (String) redisTemplate.opsForValue().get(key);
+
+        //是否符合条件
+        if (!seckillPath.equals(reallyPath)){
+            return false;
+        }
+
+        return true;
+    }
 }

@@ -97,7 +97,11 @@ public class BaseController {
         } else if (e instanceof GoodsSoldOutException){
             jsonDesign.setStatus(7070);
             jsonDesign.setDescription("商品售尽");
+        }else if (e instanceof SeckillPathErrorException){
+            jsonDesign.setStatus(7075);
+            jsonDesign.setDescription("秒杀接口错误");
         }
+
         return jsonDesign;
     }
 

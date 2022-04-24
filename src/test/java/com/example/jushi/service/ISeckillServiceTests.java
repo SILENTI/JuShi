@@ -1,6 +1,8 @@
 package com.example.jushi.service;
 
+import com.example.jushi.model.User;
 import com.example.jushi.vo.SeckillGoodsVo;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import java.util.List;
  * date: 2022/3/19 15:43
  * Description:
  */
+@Slf4j
 @SpringBootTest
 @RunWith(SpringRunner.class)
 public class ISeckillServiceTests {
@@ -32,6 +35,17 @@ public class ISeckillServiceTests {
         for (SeckillGoodsVo goodsVo : goodsVos) {
             System.out.println(goodsVo.toString());
         }
+    }
+
+    /**
+     * 获取秒杀接口
+     * */
+    @Test
+    public void getSeckillPath (){
+        User user  = new User();
+        user.setUid(1);
+        String seckillPath = seckillService.getSeckillPath(user,1);
+        log.info(seckillPath);
     }
 
 }
