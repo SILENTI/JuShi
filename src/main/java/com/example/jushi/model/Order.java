@@ -8,9 +8,12 @@ import java.util.Date;
  * @author 居無何
  */
 public class Order implements Serializable {
+
     private Integer oid;
 
     private Integer uid;
+
+    private Integer sid;
 
     private String cneeName;
 
@@ -168,11 +171,20 @@ public class Order implements Serializable {
         this.modifTime = modifTime;
     }
 
+    public Integer getSid() {
+        return sid;
+    }
+
+    public void setSid(Integer sid) {
+        this.sid = sid;
+    }
+
     @Override
     public String toString() {
         return "Order{" +
                 "oid=" + oid +
                 ", uid=" + uid +
+                ", sid=" + sid +
                 ", cneeName='" + cneeName + '\'' +
                 ", cneePhone='" + cneePhone + '\'' +
                 ", cneeProvince='" + cneeProvince + '\'' +

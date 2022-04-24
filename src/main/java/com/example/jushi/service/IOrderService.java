@@ -3,6 +3,7 @@ package com.example.jushi.service;
 import com.example.jushi.model.Order;
 import com.example.jushi.model.OrderItem;
 import com.example.jushi.model.Trolley;
+import com.example.jushi.model.User;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -68,5 +69,12 @@ public interface IOrderService {
      */
     void createOrderItem (OrderItem orderItem);
 
+    /**
+     * 判断用户是否下单成功
+     * @param user
+     * @param sid
+     * @return
+     */
+    boolean judgeSeckillOrder (User user , Integer sid);
 
 }

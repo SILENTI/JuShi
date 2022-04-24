@@ -5,6 +5,7 @@
   <resultMap id="BaseResultMap" type="com.example.jushi.model.Order">
     <id column="oid" jdbcType="INTEGER" property="oid" />
     <result column="uid" jdbcType="INTEGER" property="uid" />
+    <result column="sid" jdbcType="INTEGER" property="sid" />
     <result column="cnee_name" jdbcType="VARCHAR" property="cneeName" />
     <result column="cnee_phone" jdbcType="VARCHAR" property="cneePhone" />
     <result column="cnee_province" jdbcType="VARCHAR" property="cneeProvince" />
@@ -56,6 +57,19 @@
   <!--根据uid和aid查询order对象-->
   <select id="selectOrderByUidAndGid">
 
+  </select>
+
+  <!--根据uid和sid查询到Order信息-->
+  <select id="selectOrderByUidAndSid" resultMap="BaseResultMap">
+    SELECT
+      `order`.*
+    FROM
+      `order`
+    WHERE
+      `order`.uid = #{uid,jdbcType=INTEGER} AND
+      `order`.sid = #{sid,jdbcType=INTEGER}
+    ORDER BY
+      `order`.create_time DESC
   </select>
 
 </mapper>

@@ -67,6 +67,9 @@ public class BaseController {
         }else if (e instanceof SeckillGoodsSellOutException){
             jsonDesign.setStatus(6050);
             jsonDesign.setDescription("商品已销售完");
+        } else if (e instanceof SeckillGoodsIsNull){
+            jsonDesign.setStatus(6055);
+            jsonDesign.setDescription("未能查询到秒杀商品");
         } else if (e instanceof SeckillGoodsOverTimeException){
             jsonDesign.setStatus(6060);
             jsonDesign.setDescription("不在秒杀时间范围内");

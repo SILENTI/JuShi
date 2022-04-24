@@ -64,9 +64,9 @@
             seckill.end_time
         FROM
             seckill
-                NATURAL LEFT JOIN
+                LEFT JOIN
             goods
-        WHERE
+        ON
             seckill.gid = goods.g_id
     </select>
 

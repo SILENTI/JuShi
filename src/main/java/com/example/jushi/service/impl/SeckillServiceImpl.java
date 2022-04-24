@@ -105,7 +105,9 @@ public class SeckillServiceImpl extends ServiceImpl<SeckillMapper, Seckill> impl
 
         //若在订单创建的时间在秒杀时间范围内-抛出异常
         if (seckill.getStartTime().isBefore(time) && seckill.getEndTime().isAfter(time)){
-            throw new SeckillGoodsExcessPurchaseQuantityException("用户购入数量，已超出范围");
+            throw new SeckillGoodsExcessPurchaseQuantityException("用户重复购入");
         }
     }
+
+
 }

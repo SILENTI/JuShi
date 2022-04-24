@@ -9,10 +9,7 @@ import com.example.jushi.service.IAddressService;
 import com.example.jushi.service.IGoodsService;
 import com.example.jushi.service.IOrderService;
 import com.example.jushi.service.ITrolleyService;
-import com.example.jushi.service.ex.GoodsSoldOutException;
-import com.example.jushi.service.ex.InsertException;
-import com.example.jushi.service.ex.SeckillGoodsSellOutException;
-import com.example.jushi.service.ex.UpdateException;
+import com.example.jushi.service.ex.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -328,5 +325,29 @@ public class OrderServiceImpl implements IOrderService {
     @Override
     public void createOrderItem(OrderItem orderItem) {
         orderItemMapper.insertOrderItem(orderItem);
+    }
+
+    /**
+     * 判断是否秒杀成功
+     * @param user
+     * @param sid
+     * @return
+     */
+    @Override
+    public boolean judgeSeckillOrder(User user, Integer sid) {
+
+        //判断用户信息是否过期
+        if (user == null){
+            throw new UserLoginInfoExpiredException("用户登录信息过期");
+        }
+
+        //读取底层数据的查询是否含有符合该信息的订单
+        Order order = orderMapper.selectOrderByUidAndSid(user.getUid(), sid);
+
+        if (order == null){
+            return false;
+        }
+
+        return true;
     }
 }

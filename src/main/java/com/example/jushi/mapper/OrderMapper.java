@@ -34,4 +34,12 @@ public interface OrderMapper {
      */
     Order selectOrderByUidAndGid (Integer uid, Integer gid);
 
+    /**
+     * 根据uid和sid查询到Order信息
+     * @param uid
+     * @param sid
+     * @return
+     */
+    Order selectOrderByUidAndSid (Integer uid, Integer sid);
+
 }

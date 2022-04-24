@@ -38,4 +38,13 @@ public class OrderMapperTests {
     public void selectOrderByAid (){
         System.out.println(orderMapper.selectOrderByAid(1).toString());
     }
+
+    /**
+     * 根据uid和sid查询Order信息 ✔
+     */
+    @Test
+    public void selectOrderByUidAndSid (){
+        Order order = orderMapper.selectOrderByUidAndSid(14,1);
+        System.out.println(order.toString());
+    }
 }

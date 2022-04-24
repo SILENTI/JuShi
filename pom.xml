@@ -45,6 +45,13 @@
             <version>1.4.0</version>
         </dependency>
 
+        <!--FastJson-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.62</version>
+        </dependency>
+
         <!--mybatis-->
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
@@ -105,6 +112,12 @@
             <scope>runtime</scope>
             <optional>true</optional>
         </dependency>
+
+        <!--连接RabbitMQ-->
+        <dependency>
+            <groupId>org.springframework.amqp</groupId>
+            <artifactId>spring-rabbit</artifactId>
+        </dependency>
         
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -126,6 +139,12 @@
             <artifactId>fastjson</artifactId>
             <version>1.2.76</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.76</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 
@@ -160,13 +179,30 @@
                 </configuration>
             </plugin>-->
 
+            <!--打包插件-->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <fork>true</fork>
+                    <mainClass>com.example.jushi.JuShiApplication</mainClass>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
             <!--MyBatis Generator-->
             <plugin>
                 <groupId>org.mybatis.generator</groupId>
                 <artifactId>mybatis-generator-maven-plugin</artifactId>
                 <version> 1.4.0</version>
                 <configuration>
-                    <!--  配置 mybaitsGeneratorConfig.xml文件  这个文件中包含  数据库的连接、 即将生成的文件的路径的设置、以及须要生成的表名的设置 -->
+                    <!--  配置 MybatsGeneratorConfig.xml文件  这个文件中包含  数据库的连接、 即将生成的文件的路径的设置、以及须要生成的表名的设置 -->
                     <configurationFile>src/main/resources/generatorConfig/generatorConfig.xml</configurationFile>
                     <verbose>true</verbose>
                     <overwrite>true</overwrite>
