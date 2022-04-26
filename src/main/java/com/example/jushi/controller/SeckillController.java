@@ -10,6 +10,11 @@ import com.example.jushi.util.JsonResult;
 import com.example.jushi.rabbitmq.RabbitMQSender;
 import com.example.jushi.vo.SeckillGoodsVo;
 import com.example.jushi.vo.SeckillMessage;
+import com.wf.captcha.ChineseCaptcha;
+import com.wf.captcha.GifCaptcha;
+import com.wf.captcha.SpecCaptcha;
+import com.wf.captcha.base.Captcha;
+import com.wf.captcha.utils.CaptchaUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +26,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.awt.*;
 import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -193,7 +202,7 @@ public class SeckillController implements InitializingBean {
     }
 
     /**
-     *
+     * 动态接口并下单操作
      * @param aid
      * @param sid
      * @param num
@@ -215,5 +224,37 @@ public class SeckillController implements InitializingBean {
 
         //商品秒杀
         return this.createOrderBySeckill(aid, sid, num, session);
+    }
+
+
+    @RequestMapping("/captcha")
+    public void captcha(User user, Integer sid, HttpServletRequest request, HttpServletResponse response) throws Exception {
+        /*前端应用：<img src="/captcha" width="130px" height="48px" />*/
+
+        // 设置请求头为输出图片类型
+        response.setContentType("image/gif");
+        response.setHeader("Pragma", "No-cache");
+        response.setHeader("Cache-Control", "no-cache");
+        response.setDateHeader("Expires", 0);
+
+        // 三个参数分别为宽、高、位数
+        SpecCaptcha specCaptcha = new SpecCaptcha(130, 48, 5);
+        // 设置字体
+        specCaptcha.setFont(new Font("Verdana", Font.PLAIN, 32));  // 有默认字体，可以不用设置
+        // 设置类型，纯数字、纯字母、字母数字混合
+        specCaptcha.setCharType(Captcha.TYPE_ONLY_NUMBER);
+
+        String verCode = specCaptcha.text().toLowerCase();
+//        String key = UUID.randomUUID().toString();
+        String key = "seckillCaptcha:"+user.getUid()+"-"+sid;
+        // 存入redis并设置过期时间为3分钟
+        redisTemplate.opsForValue().set(key, verCode, 3, TimeUnit.MINUTES);
+
+        // 验证码存入session
+        request.getSession().setAttribute("captcha", specCaptcha.text().toLowerCase());
+
+        // 输出图片流
+        specCaptcha.out(response.getOutputStream());
+
     }
 }

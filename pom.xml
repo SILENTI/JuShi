@@ -85,6 +85,13 @@
             <artifactId>freemarker</artifactId>
         </dependency>
 
+        <!--验证码开源项目-->
+            <dependency>
+                <groupId>com.github.whvcse</groupId>
+                <artifactId>easy-captcha</artifactId>
+                <version>1.6.2</version>
+            </dependency>
+
         <!--实体类注解-->
         <dependency>
             <groupId>io.swagger</groupId>
